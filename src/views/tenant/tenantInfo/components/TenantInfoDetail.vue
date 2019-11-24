@@ -1,14 +1,14 @@
 <template> 
   <el-card class="form-container" shadow="never">
     <el-form :model="tenantInfo" :rules="rules" ref="tenantInfoFrom" label-width="150px">
+      <el-form-item label="租户编号：" prop="id">
+        <el-input v-model="tenantInfo.id" :disabled="true"></el-input>
+      </el-form-item>
       <el-form-item label="租户名称：" prop="tenantName">
         <el-input v-model="tenantInfo.tenantName"></el-input>
       </el-form-item>
-      <el-form-item label="账户余额：" prop="tenantBalance">
-        <el-input v-model="tenantInfo.tenantBalance"></el-input>
-      </el-form-item>
-      <el-form-item label="显示名称：" prop="tenantDisplayName">
-        <el-input v-model="tenantInfo.tenantDisplayName"></el-input>
+      <el-form-item label="显示名称：" prop="displayName">
+        <el-input v-model="tenantInfo.displayName"></el-input>
       </el-form-item>
       <el-form-item label="省：" prop="tenantProvince">
         <el-input v-model="tenantInfo.tenantProvince"></el-input>
@@ -16,7 +16,7 @@
       <el-form-item label="市：" prop="tenantCity">
         <el-input v-model="tenantInfo.tenantCity"></el-input>
       </el-form-item>
-      <el-form-item label="区/县：" prop="tenantArea">
+      <el-form-item label="区县：" prop="tenantArea">
         <el-input v-model="tenantInfo.tenantArea"></el-input>
       </el-form-item>
       <el-form-item label="联系地址：" prop="tenantAddress">
@@ -28,8 +28,8 @@
       <el-form-item label="手机号码：" prop="tenantMobile">
         <el-input v-model="tenantInfo.tenantMobile"></el-input>
       </el-form-item>
-      <el-form-item label="单位电话：" prop="tenantPhone">
-        <el-input v-model="tenantInfo.tenantPhone"></el-input>
+      <el-form-item label="单位电话：" prop="tenantTel">
+        <el-input v-model="tenantInfo.tenantTel"></el-input>
       </el-form-item>
       <el-form-item label="邮箱：" prop="tenantEmail">
         <el-input v-model="tenantInfo.tenantEmail"></el-input>
@@ -37,8 +37,10 @@
       <el-form-item label="QQ号码：" prop="tenantQq">
         <el-input v-model="tenantInfo.tenantQq"></el-input>
       </el-form-item>
-      <el-form-item label="租户类型：" prop="tenantType">
-        <el-select v-model="tenantInfo.tenantType" clearable>
+      <el-form-item label="租户类型：" prop="tenantType" clearable>
+        <el-select
+          v-model="tenantInfo.tenantType"
+          placeholder="请选择租户类型">
           <el-option
             v-for="item in tenantTypeOptions"
             :key="item.value"
@@ -46,9 +48,11 @@
             :value="item.value">
           </el-option>
         </el-select>
-      </el-form-item>
-      <el-form-item label="租户状态：" prop="tenantStatus">
-        <el-select v-model="tenantInfo.tenantStatus" clearable>
+      </el-form-item>      
+      <el-form-item label="租户状态：" prop="tenantStatus" clearable>
+        <el-select
+          v-model="tenantInfo.tenantStatus"
+          placeholder="请选择租户状态">
           <el-option
             v-for="item in tenantStatusOptions"
             :key="item.value"
@@ -56,12 +60,25 @@
             :value="item.value">
           </el-option>
         </el-select>
+      </el-form-item>      
+      <el-form-item label="注册时间：" prop="regTime">
+        <el-date-picker
+                class="input-width"
+                v-model="tenantInfo.regTime"
+                value-format="yyyy-MM-dd hh:mm:ss"
+                type="datetime"
+                :disabled="true"
+                placeholder="请选择注册时间">
+        </el-date-picker>
       </el-form-item>
-      <el-form-item label="注册时间：" prop="registerDate">
-        <el-input v-model="tenantInfo.registerDate"></el-input>
-      </el-form-item>
-      <el-form-item label="到期日期：" prop="expireDate">
-        <el-input v-model="tenantInfo.expireDate"></el-input>
+      <el-form-item label="到期日期：" prop="endDate">
+        <el-date-picker
+                class="input-width"
+                v-model="tenantInfo.endDate"
+                value-format="yyyy-MM-dd"
+                type="date"
+                placeholder="请选择到期日期">
+        </el-date-picker>
       </el-form-item>
       <el-form-item label="税号：" prop="creditNumber">
         <el-input v-model="tenantInfo.creditNumber"></el-input>
@@ -75,38 +92,44 @@
       <el-form-item label="开户行名称：" prop="bankName">
         <el-input v-model="tenantInfo.bankName"></el-input>
       </el-form-item>
-      <el-form-item label="开户账号：" prop="bankAccount">
-        <el-input v-model="tenantInfo.bankAccount"></el-input>
+      <el-form-item label="开户账号：" prop="accountNo">
+        <el-input v-model="tenantInfo.accountNo"></el-input>
       </el-form-item>
-      <el-form-item label="部分缴费：" prop="partChargeOn">
-        <el-select v-model="tenantInfo.partChargeOn" clearable>
+      <el-form-item label="是否启用部分缴费：" prop="partChargeOn">
+        <el-switch
+          v-model="tenantInfo.partChargeOn"
+          :active-value="1"
+          :inactive-value="0">
+        </el-switch>
+      </el-form-item>
+      <el-form-item label="是否启用违约金：" prop="overDuefineOn">
+        <el-switch
+          v-model="tenantInfo.overDuefineOn"
+          :active-value="1"
+          :inactive-value="0">
+        </el-switch>
+      </el-form-item>
+      <el-form-item label="违约金宽限天数：" prop="overDuefineDay">
+        <el-input-number v-model="tenantInfo.overDuefineDay" :min="0" placeholder="违约金宽限天数"></el-input-number>
+      </el-form-item>
+      <el-form-item label="违约金每天收取比例：" prop="overDuefineRatio">
+        <el-input-number v-model="tenantInfo.overDuefineRatio" :min="0" :max="1" precision="4" placeholder="违约金每天收取比例"></el-input-number>
+      </el-form-item>
+      <el-form-item label="违约金封顶比例：" prop="overDuefineTopRatio">
+        <el-input-number v-model="tenantInfo.overDuefineTopRatio" :min="0" :max="1" precision="4" placeholder="违约金封顶比例"></el-input-number>
+      </el-form-item>
+      <el-form-item label="预存抵扣方式：" prop="ycdkType" clearable>
+        <el-select
+          v-model="tenantInfo.ycdkType"
+          placeholder="请选择预存抵扣方式">
           <el-option
-            v-for="item in partChargeOnOptions"
+            v-for="item in ycdkTypeOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value">
           </el-option>
         </el-select>
-      </el-form-item>
-      <el-form-item label="违约金：" prop="fineOn">
-        <el-select v-model="tenantInfo.fineOn" clearable>
-          <el-option
-            v-for="item in fineOnOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="违约金宽限天数：" prop="fineDay">
-        <el-input v-model="tenantInfo.fineDay"></el-input>
-      </el-form-item>
-      <el-form-item label="违约金每天收取比例：" prop="fineRate">
-        <el-input v-model="tenantInfo.fineRate"></el-input>
-      </el-form-item>
-      <el-form-item label="违约金封顶比例：" prop="fineRateCap">
-        <el-input v-model="tenantInfo.fineRateCap"></el-input>
-      </el-form-item>
+      </el-form-item>      
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantInfoFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('tenantInfoFrom')">重置</el-button>
@@ -116,34 +139,35 @@
 </template>
 <script>
   import {createTenantInfo, getTenantInfo, updateTenantInfo} from '@/api/tenantInfo'
+  import {formatDate} from '@/utils/date';
   import SingleUpload from '@/components/Upload/singleUpload'
   const defaultTenantInfo={
     tenantName: '',
-    tenantBalance: '',
-    tenantDisplayName: '',
+    displayName: '',
     tenantProvince: '',
     tenantCity: '',
     tenantArea: '',
     tenantAddress: '',
     tenantLinkman: '',
     tenantMobile: '',
-    tenantPhone: '',
+    tenantTel: '',
     tenantEmail: '',
     tenantQq: '',
-    tenantType: 0,
-    tenantStatus: 0,
-    registerDate: '',
-    expireDate: '',
+    tenantType: '',
+    tenantStatus: '',
+    regTime: '',
+    endDate: '',
     creditNumber: '',
     invoiceAddress: '',
     bankNo: '',
     bankName: '',
-    bankAccount: '',
-    partChargeOn: 0,
-    fineOn: 0,
-    fineDay: 0,
-    fineRate: '',
-    fineRateCap: ''
+    accountNo: '',
+    partChargeOn: 1,
+    overDuefineOn: 1,
+    overDuefineDay: 0,
+    overDuefineRatio: null,
+    overDuefineTopRatio: null,
+    ycdkType: ''
   };
   const defaultTenantTypeOptions=[
     {
@@ -165,28 +189,18 @@
       label: '正式'
     },
     {
-      value: 0,
+      value: 2,
       label: '试用'
     }
   ];
-  const defaultPartChargeOnOptions=[
+  const defaultYcdkTypeOptions=[
     {
       value: 1,
-      label: '启用'
+      label: '抄表后即时抵扣'
     },
     {
-      value: 0,
-      label: '不启用'
-    }
-  ];
-  const defaultFineOnOptions=[
-    {
-      value: 1,
-      label: '启用'
-    },
-    {
-      value: 0,
-      label: '不启用'
+      value: 2,
+      label: '人工发起抵扣'
     }
   ];
   export default {
@@ -201,27 +215,15 @@
     data() {
       return {
         tenantInfo:Object.assign({}, defaultTenantInfo),
+        tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
+        tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
+        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         rules: {
           tenantName: [
             {required: true, message: '请输入租户名称', trigger: 'blur'}
           ],
-          tenantBalance: [
-            {required: true, message: '请输入账户余额', trigger: 'blur'}
-          ],
-          tenantDisplayName: [
+          displayName: [
             {required: true, message: '请输入显示名称', trigger: 'blur'}
-          ],
-          tenantProvince: [
-            {required: true, message: '请输入省', trigger: 'blur'}
-          ],
-          tenantCity: [
-            {required: true, message: '请输入市', trigger: 'blur'}
-          ],
-          tenantArea: [
-            {required: true, message: '请输入区/县', trigger: 'blur'}
-          ],
-          tenantAddress: [
-            {required: true, message: '请输入联系地址', trigger: 'blur'}
           ],
           tenantLinkman: [
             {required: true, message: '请输入联系人', trigger: 'blur'}
@@ -229,14 +231,8 @@
           tenantMobile: [
             {required: true, message: '请输入手机号码', trigger: 'blur'}
           ],
-          tenantPhone: [
-            {required: true, message: '请输入单位电话', trigger: 'blur'}
-          ],
           tenantEmail: [
             {required: true, message: '请输入邮箱', trigger: 'blur'}
-          ],
-          tenantQq: [
-            {required: true, message: '请输入QQ号码', trigger: 'blur'}
           ],
           tenantType: [
             {required: true, message: '请选择租户类型', trigger: 'blur'}
@@ -244,53 +240,19 @@
           tenantStatus: [
             {required: true, message: '请选择租户状态', trigger: 'blur'}
           ],
-          registerDate: [
-            {required: true, message: '请输入注册时间', trigger: 'blur'}
-          ],
-          expireDate: [
+          endDate: [
             {required: true, message: '请输入到期日期', trigger: 'blur'}
-          ],
-          creditNumber: [
-            {required: true, message: '请输入税号', trigger: 'blur'}
-          ],
-          invoiceAddress: [
-            {required: true, message: '请输入开票地址', trigger: 'blur'}
-          ],
-          bankNo: [
-            {required: true, message: '请输入开户行行号', trigger: 'blur'}
-          ],
-          bankName: [
-            {required: true, message: '请输入开户行名称', trigger: 'blur'}
-          ],
-          bankAccount: [
-            {required: true, message: '请输入开户账号', trigger: 'blur'}
-          ],
-          partChargeOn: [
-            {required: true, message: '请选择部分缴费', trigger: 'blur'}
-          ],
-          fineOn: [
-            {required: true, message: '请选择违约金', trigger: 'blur'}
-          ],
-          fineDay: [
-            {required: true, message: '请输入违约金宽限天数', trigger: 'blur'}
-          ],
-          fineRate: [
-            {required: true, message: '请输入违约金每天收取比例', trigger: 'blur'}
-          ],
-          fineRateCap: [
-            {required: true, message: '请输入违约金封顶比例', trigger: 'blur'}
           ]
-        },
-        tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
-        tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
-        partChargeOnOptions: Object.assign({},defaultPartChargeOnOptions),
-        fineOnOptions: Object.assign({},defaultFineOnOptions)
+        }
       }
     },
     created() {
       if (this.isEdit) {
         getTenantInfo(this.$route.query.id).then(response => {
-          this.tenantInfo = response.data;
+          let data = response.data;
+          data.regTime = formatDate(new Date(data.regTime), 'yyyy-MM-dd hh:mm:ss');
+          data.endDate = formatDate(new Date(data.endDate), 'yyyy-MM-dd');
+          this.tenantInfo = data;
         });
       }else{
         this.tenantInfo = Object.assign({},defaultTenantInfo);

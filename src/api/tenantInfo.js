@@ -39,17 +39,16 @@ export function updateTenantInfo(id,data) {
 
 export function updatePartChargeOn(data) {
   return request({
-    url:'/tenantInfo/updatePartChargeOn',
+    url:'/tenantInfo/update/partChargeOn',
     method:'post',
     data:data
   })
 }
 
-export function updateFineOn(data) {
+export function updateOverDuefineOn(data) {
   return request({
-    url:'/tenantInfo/updateFineOn',
+    url:'/tenantInfo/update/overDuefineOn',
     method:'post',
     data:data
   })
 }
-

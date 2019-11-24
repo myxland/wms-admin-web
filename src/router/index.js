@@ -33,6 +33,54 @@ export const constantRouterMap = [
     }]
   },
   {
+    path: '/tenant',
+    component: Layout,
+    redirect: '/tenant/tenantInfo',
+    name: 'tenant',
+    meta: {title: '租户', icon: 'tenantInfo'},
+    children: [{
+      path: 'tenantInfo',
+      name: 'tenantInfo',
+      component: () => import('@/views/tenant/tenantInfo/index'),
+      meta: {title: '租户列表', icon: 'tenantInfo-list'}
+    },
+      {
+        path: 'addTenantInfo',
+        name: 'addTenantInfo',
+        component: () => import('@/views/tenant/tenantInfo/add'),
+        meta: {title: '添加租户', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantInfo',
+        name: 'updateTenantInfo',
+        component: () => import('@/views/tenant/tenantInfo/update'),
+        meta: {title: '修改租户', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'tenantAccount',
+        name: 'tenantAccount',
+        component: () => import('@/views/tenant/tenantAccount/index'),
+        meta: {title: '租户账户列表', icon: 'tenantAccount-list'}
+      },
+      {
+        path: 'addTenantAccount',
+        name: 'addTenantAccount',
+        component: () => import('@/views/tenant/tenantAccount/add'),
+        meta: {title: '添加租户账户', icon: 'tenantAccount-add'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantAccount',
+        name: 'updateTenantAccount',
+        component: () => import('@/views/tenant/tenantAccount/update'),
+        meta: {title: '修改租户账户', icon: 'tenantAccount-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
     path: '/mbg',
     component: Layout,
     redirect: '/mbg/tenantSms',
@@ -870,26 +918,9 @@ export const constantRouterMap = [
         meta: {title: '修改用户信息', icon: 'userInfo-add'},
         hidden: true
       },
-      {
-        path: 'tenantInfo',
-        name: 'tenantInfo',
-        component: () => import('@/views/wms/tenantInfo/index'),
-        meta: {title: '租户表列表', icon: 'tenantInfo-list'}
-      },
-        {
-          path: 'addTenantInfo',
-          name: 'addTenantInfo',
-          component: () => import('@/views/wms/tenantInfo/add'),
-          meta: {title: '添加租户表', icon: 'tenantInfo-add'},
-          hidden: true
-        },
-        {
-          path: 'updateTenantInfo',
-          name: 'updateTenantInfo',
-          component: () => import('@/views/wms/tenantInfo/update'),
-          meta: {title: '修改租户表', icon: 'tenantInfo-add'},
-          hidden: true
-        },
+      
+       
+        
         {
           path: 'systemInfo',
           name: 'systemInfo',

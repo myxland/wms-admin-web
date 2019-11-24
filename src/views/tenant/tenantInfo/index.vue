@@ -24,25 +24,48 @@
               <el-input style="width: 203px" v-model="listQuery.id" placeholder="租户编号"></el-input>
             </el-form-item>
             <el-form-item label="租户名称：">
-              <el-input style="width: 203px" v-model="listQuery.tenantName" placeholder="租户名称"></el-input>
+              <el-input style="width: 203px" v-model="listQuery.tenantNameLike" placeholder="租户名称"></el-input>
             </el-form-item>
             <el-form-item label="显示名称：">
-              <el-input style="width: 203px" v-model="listQuery.tenantDisplayName" placeholder="显示名称"></el-input>
+              <el-input style="width: 203px" v-model="listQuery.displayNameLike" placeholder="显示名称"></el-input>
+            </el-form-item>
+            <el-form-item label="联系人：">
+              <el-input style="width: 203px" v-model="listQuery.tenantLinkman" placeholder="联系人"></el-input>
             </el-form-item>
             <el-form-item label="手机号码：">
               <el-input style="width: 203px" v-model="listQuery.tenantMobile" placeholder="手机号码"></el-input>
             </el-form-item>
+            <el-form-item label="租户类型：">
+              <el-select v-model="listQuery.tenantType" placeholder="全部" clearable>
+                <el-option
+                  v-for="item in tenantTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="租户状态：">
+              <el-select v-model="listQuery.tenantStatus" placeholder="全部" clearable>
+                <el-option
+                  v-for="item in tenantStatusOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
             <el-form-item label="注册时间：">
               <el-date-picker
                 class="input-width"
-                v-model="listQuery.registerDateStart"
+                v-model="listQuery.regTimeStart"
                 value-format="yyyy-MM-dd"
                 type="date"
                 placeholder="请选择时间">
               </el-date-picker>
               <el-date-picker
                 class="input-width"
-                v-model="listQuery.registerDateEnd"
+                v-model="listQuery.regTimeEnd"
                 value-format="yyyy-MM-dd"
                 type="date"
                 placeholder="请选择时间">
@@ -51,14 +74,14 @@
             <el-form-item label="到期日期：">
               <el-date-picker
                 class="input-width"
-                v-model="listQuery.expireDateStart"
+                v-model="listQuery.endDateStart"
                 value-format="yyyy-MM-dd"
                 type="date"
                 placeholder="请选择时间">
               </el-date-picker>
               <el-date-picker
                 class="input-width"
-                v-model="listQuery.expireDateEnd"
+                v-model="listQuery.endDateEnd"
                 value-format="yyyy-MM-dd"
                 type="date"
                 placeholder="请选择时间">
@@ -85,34 +108,31 @@
                 v-loading="listLoading"
                 border>
         <el-table-column type="selection" width="60" align="center"></el-table-column>
-        <el-table-column label="租户编号" width="120" align="right" header-align="center">
+        <el-table-column label="租户编号" width="180" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="租户名称" width="200" align="left" header-align="center">
+        <el-table-column label="租户名称" width="" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantName}}</template>
         </el-table-column>
-        <el-table-column label="账户余额" width="120" align="right" header-align="center">
-          <template slot-scope="scope">{{scope.row.tenantBalance}}</template>
-        </el-table-column>
         <el-table-column label="显示名称" width="120" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.tenantDisplayName}}</template>
+          <template slot-scope="scope">{{scope.row.displayName}}</template>
         </el-table-column>
-        <el-table-column label="联系人" width="120" align="left" header-align="center">
+        <el-table-column label="联系人" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantLinkman}}</template>
         </el-table-column>
         <el-table-column label="手机号码" width="120" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantMobile}}</template>
         </el-table-column>
-        <el-table-column label="租户类型" width="100" align="center" header-align="center">
+        <el-table-column label="租户类型" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantType | formatTenantType}}</template>
         </el-table-column>
-        <el-table-column label="租户状态" width="100" align="center" header-align="center">
+        <el-table-column label="租户状态" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantStatus | formatTenantStatus}}</template>
         </el-table-column>
-        <el-table-column label="到期日期" width="120" align="center" header-align="center">
-          <template slot-scope="scope">{{scope.row.expireDate | formatDate}}</template>
+        <el-table-column label="到期日期" width="100" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.endDate | formatDate}}</template>
         </el-table-column>
-        <el-table-column label="部分缴费" width="100" align="center" header-align="center">
+        <el-table-column label="是否启用部分缴费" width="100" align="left" header-align="center">
           <template slot-scope="scope">
             <el-switch
               @change="handlePartChargeOnChange(scope.$index, scope.row)"
@@ -122,13 +142,13 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="违约金" width="100" align="center" header-align="center">
+        <el-table-column label="是否启用违约金" width="100" align="left" header-align="center">
           <template slot-scope="scope">
             <el-switch
-              @change="handleFineOnChange(scope.$index, scope.row)"
+              @change="handleOverDuefineOnChange(scope.$index, scope.row)"
               :active-value="1"
               :inactive-value="0"
-              v-model="scope.row.fineOn">
+              v-model="scope.row.overDuefineOn">
             </el-switch>
           </template>
         </el-table-column>
@@ -182,42 +202,43 @@
   </div>
 </template>
 <script>
-  import {fetchList, deleteTenantInfo, updatePartChargeOn, updateFineOn} from '@/api/tenantInfo'
+  import {fetchList, deleteTenantInfo, updatePartChargeOn, updateOverDuefineOn} from '@/api/tenantInfo'
   import {formatDate} from '@/utils/date';
+  import accounting from 'accounting';
   const defaultListQuery = {
     pageNum: 1,
     pageSize: 10,
     id: null,
-    tenantName: null,
-    tenantBalance: null,
-    tenantDisplayName: null,
+    tenantNameLike: null,
+    displayNameLike: null,
     tenantProvince: null,
     tenantCity: null,
     tenantArea: null,
     tenantAddress: null,
     tenantLinkman: null,
     tenantMobile: null,
-    tenantPhone: null,
+    tenantTel: null,
     tenantEmail: null,
     tenantQq: null,
     tenantType: null,
     tenantStatus: null,
-    registerDate: null,
-    registerDateStart: null,
-    registerDateEnd: null,
-    expireDate: null,
-    expireDateStart: null,
-    expireDateEnd: null,
+    regTime: null,
+    regTimeStart: null,
+    regTimeEnd: null,
+    endDate: null,
+    endDateStart: null,
+    endDateEnd: null,
     creditNumber: null,
     invoiceAddress: null,
     bankNo: null,
     bankName: null,
-    bankAccount: null,
+    accountNo: null,
     partChargeOn: null,
-    fineOn: null,
-    fineDay: null,
-    fineRate: null,
-    fineRateCap: null
+    overDuefineOn: null,
+    overDuefineDay: null,
+    overDuefineRatio: null,
+    overDuefineTopRatio: null,
+    ycdkType: null
   };
   const defaultTenantTypeOptions=[
     {
@@ -239,7 +260,7 @@
       label: '正式'
     },
     {
-      value: 0,
+      value: 2,
       label: '试用'
     }
   ];
@@ -253,7 +274,7 @@
       label: '不启用'
     }
   ];
-  const defaultFineOnOptions=[
+  const defaultOverDuefineOnOptions=[
     {
       value: 1,
       label: '启用'
@@ -261,6 +282,16 @@
     {
       value: 0,
       label: '不启用'
+    }
+  ];
+  const defaultYcdkTypeOptions=[
+    {
+      value: 1,
+      label: '抄表后即时抵扣'
+    },
+    {
+      value: 2,
+      label: '人工发起抵扣'
     }
   ];
   
@@ -278,7 +309,8 @@
         tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
         tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
         partChargeOnOptions: Object.assign({},defaultPartChargeOnOptions),
-        fineOnOptions: Object.assign({},defaultFineOnOptions),
+        overDuefineOnOptions: Object.assign({},defaultOverDuefineOnOptions),
+        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         multipleSelection: []
       }
     },
@@ -299,6 +331,10 @@
         }
         let date = new Date(time);
         return formatDate(date, 'yyyy-MM-dd')
+      },
+      formatMoney(money){
+        // 指定货币符号、保留小数位、千位间隔符
+        return accounting.formatMoney(money,'',2,'');
       },
       formatTenantType(tenantType){
         for(let i=0;i<defaultTenantTypeOptions.length;i++){
@@ -321,10 +357,17 @@
           }
         }
       },
-      formatFineOn(fineOn){
-        for(let i=0;i<defaultFineOnOptions.length;i++){
-          if(fineOn===defaultFineOnOptions[i].value){
-            return defaultFineOnOptions[i].label;
+      formatOverDuefineOn(overDuefineOn){
+        for(let i=0;i<defaultOverDuefineOnOptions.length;i++){
+          if(overDuefineOn===defaultOverDuefineOnOptions[i].value){
+            return defaultOverDuefineOnOptions[i].label;
+          }
+        }
+      },
+      formatYcdkType(ycdkType){
+        for(let i=0;i<defaultYcdkTypeOptions.length;i++){
+          if(ycdkType===defaultYcdkTypeOptions[i].value){
+            return defaultYcdkTypeOptions[i].label;
           }
         }
       },
@@ -347,10 +390,10 @@
         this.multipleSelection = val;
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/wms/updateTenantInfo', query: {id: row.id}})
+        this.$router.push({path: '/tenant/updateTenantInfo', query: {id: row.id}})
       },
       handleDelete(index, row) {
-        this.$confirm('是否要删除该租户表', '提示', {
+        this.$confirm('是否要删除该租户', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -365,9 +408,15 @@
           });
         });
       },
+      handleSizeChange(val) {
+        this.listQuery.pageNum = 1;
+        this.listQuery.pageSize = val;
+        this.getList();
+      },
       handlePartChargeOnChange(index, row) {
-        var data = new URLSearchParams();
-        data.append("id", row.id);
+        let data = new URLSearchParams();
+        ;
+        data.append("ids", row.id);
         data.append("partChargeOn", row.partChargeOn);
         updatePartChargeOn(data).then(response => {
           this.$message({
@@ -383,28 +432,24 @@
           }
         });
       },
-      handleFineOnChange(index, row) {
-        var data = new URLSearchParams();
-        data.append("id", row.id);
-        data.append("fineOn", row.fineOn);
-        updateFineOn(data).then(response => {
+      handleOverDuefineOnChange(index, row) {
+        let data = new URLSearchParams();
+        ;
+        data.append("ids", row.id);
+        data.append("overDuefineOn", row.overDuefineOn);
+        updateOverDuefineOn(data).then(response => {
           this.$message({
             message: '修改成功',
             type: 'success',
             duration: 1000
           });
         }).catch(error => {
-          if (row.fineOn === 0) {
-            row.fineOn = 1;
+          if (row.overDuefineOn === 0) {
+            row.overDuefineOn = 1;
           } else {
-            row.fineOn = 0;
+            row.overDuefineOn = 0;
           }
         });
-      },
-      handleSizeChange(val) {
-        this.listQuery.pageNum = 1;
-        this.listQuery.pageSize = val;
-        this.getList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNum = val;
@@ -432,7 +477,7 @@
         data.append("ids", ids);
       },
       addTenantInfo() {
-        this.$router.push({path: '/wms/addTenantInfo'})
+        this.$router.push({path: '/tenant/addTenantInfo'})
       }
     }
   }
