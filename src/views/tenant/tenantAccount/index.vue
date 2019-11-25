@@ -67,6 +67,10 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
+              @click="handleView(scope.$index, scope.row)">查看
+            </el-button>
+            <el-button
+              size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
             </el-button>
             <el-button
@@ -174,6 +178,9 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+      },
+      handleView(index, row) {
+        this.$router.push({path: '/tenant/viewTenantAccount', query: {id: row.id}})
       },
       handleUpdate(index, row) {
         this.$router.push({path: '/tenant/updateTenantAccount', query: {id: row.id}})

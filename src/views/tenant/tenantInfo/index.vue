@@ -152,8 +152,12 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" align="center">
+        <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleView(scope.$index, scope.row)">查看
+            </el-button>
             <el-button
               size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
@@ -388,6 +392,9 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+      },
+      handleView(index, row) {
+        this.$router.push({path: '/tenant/viewTenantInfo', query: {id: row.id}})
       },
       handleUpdate(index, row) {
         this.$router.push({path: '/tenant/updateTenantInfo', query: {id: row.id}})

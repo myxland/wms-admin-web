@@ -52,6 +52,13 @@ export const constantRouterMap = [
         hidden: true
       },
       {
+        path: 'viewTenantInfo',
+        name: 'viewTenantInfo',
+        component: () => import('@/views/tenant/tenantInfo/view'),
+        meta: {title: '查看租户', icon: 'tenantInfo-view'},
+        hidden: true
+      },
+      {
         path: 'updateTenantInfo',
         name: 'updateTenantInfo',
         component: () => import('@/views/tenant/tenantInfo/update'),
@@ -69,6 +76,13 @@ export const constantRouterMap = [
         name: 'addTenantAccount',
         component: () => import('@/views/tenant/tenantAccount/add'),
         meta: {title: '添加租户账户', icon: 'tenantAccount-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantAccount',
+        name: 'viewTenantAccount',
+        component: () => import('@/views/tenant/tenantAccount/view'),
+        meta: {title: '查看租户账户', icon: 'tenantAccount-view'},
         hidden: true
       },
       {
