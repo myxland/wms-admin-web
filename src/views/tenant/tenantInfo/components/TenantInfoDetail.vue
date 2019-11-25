@@ -65,7 +65,7 @@
         <el-date-picker
                 class="input-width"
                 v-model="tenantInfo.regTime"
-                value-format="yyyy-MM-dd hh:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
                 :disabled="true"
                 placeholder="请选择注册时间">
@@ -253,6 +253,7 @@
           data.regTime = formatDate(new Date(data.regTime), 'yyyy-MM-dd hh:mm:ss');
           data.endDate = formatDate(new Date(data.endDate), 'yyyy-MM-dd');
           this.tenantInfo = data;
+          //this.tenantInfo = response.data;
         });
       }else{
         this.tenantInfo = Object.assign({},defaultTenantInfo);
