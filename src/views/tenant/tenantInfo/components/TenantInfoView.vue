@@ -22,8 +22,8 @@
       <el-form-item label="联系地址：" prop="tenantAddress">
       	{{tenantInfo.tenantAddress}}
       </el-form-item>
-      <el-form-item label="联系人：" prop="tenantLinkman">
-      	{{tenantInfo.tenantLinkman}}
+      <el-form-item label="联系人：" prop="tenantContact">
+      	{{tenantInfo.tenantContact}}
       </el-form-item>
       <el-form-item label="手机号码：" prop="tenantMobile">
       	{{tenantInfo.tenantMobile}}
@@ -49,47 +49,6 @@
       <el-form-item label="到期日期：" prop="endDate">
         {{tenantInfo.endDate}}
       </el-form-item>
-      <el-form-item label="税号：" prop="creditNumber">
-      	{{tenantInfo.creditNumber}}
-      </el-form-item>
-      <el-form-item label="开票地址：" prop="invoiceAddress">
-      	{{tenantInfo.invoiceAddress}}
-      </el-form-item>
-      <el-form-item label="开户行行号：" prop="bankNo">
-      	{{tenantInfo.bankNo}}
-      </el-form-item>
-      <el-form-item label="开户行名称：" prop="bankName">
-      	{{tenantInfo.bankName}}
-      </el-form-item>
-      <el-form-item label="开户账号：" prop="accountNo">
-      	{{tenantInfo.accountNo}}
-      </el-form-item>
-      <el-form-item label="是否启用部分缴费：" prop="partChargeOn">
-        <el-switch
-          v-model="tenantInfo.partChargeOn"
-          :active-value="1"
-          :inactive-value="0">
-        </el-switch>
-      </el-form-item>
-      <el-form-item label="是否启用违约金：" prop="overDuefineOn">
-        <el-switch
-          v-model="tenantInfo.overDuefineOn"
-          :active-value="1"
-          :inactive-value="0">
-        </el-switch>
-      </el-form-item>
-      <el-form-item label="违约金宽限天数：" prop="overDuefineDay">
-      	{{tenantInfo.overDuefineDay}}
-      </el-form-item>
-      <el-form-item label="违约金每天收取比例：" prop="overDuefineRatio">
-      	{{tenantInfo.overDuefineRatio}}
-      </el-form-item>
-      <el-form-item label="违约金封顶比例：" prop="overDuefineTopRatio">
-      	{{tenantInfo.overDuefineTopRatio}}
-      </el-form-item>
-      <el-form-item label="预存抵扣方式：" prop="ycdkType" clearable>
-        {{tenantInfo.ycdkType | formatYcdkType}}
-      </el-form-item>      
     </el-form>
   </el-card>
 </template>
@@ -104,7 +63,7 @@
     tenantCity: '',
     tenantArea: '',
     tenantAddress: '',
-    tenantLinkman: '',
+    tenantContact: '',
     tenantMobile: '',
     tenantTel: '',
     tenantEmail: '',
@@ -112,18 +71,7 @@
     tenantType: '',
     tenantStatus: '',
     regTime: '',
-    endDate: '',
-    creditNumber: '',
-    invoiceAddress: '',
-    bankNo: '',
-    bankName: '',
-    accountNo: '',
-    partChargeOn: 1,
-    overDuefineOn: 1,
-    overDuefineDay: 0,
-    overDuefineRatio: null,
-    overDuefineTopRatio: null,
-    ycdkType: ''
+    endDate: ''
   };
   const defaultTenantTypeOptions=[
     {
@@ -149,16 +97,6 @@
       label: '试用'
     }
   ];
-  const defaultYcdkTypeOptions=[
-    {
-      value: 1,
-      label: '抄表后即时抵扣'
-    },
-    {
-      value: 2,
-      label: '人工发起抵扣'
-    }
-  ];
   export default {
     name: 'TenantInfoView',
     data() {
@@ -166,7 +104,6 @@
         tenantInfo:Object.assign({}, defaultTenantInfo),
         tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
         tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
-        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         rules: {
         }
       }
@@ -192,13 +129,6 @@
       	for(let i=0;i<defaultTenantStatusOptions.length;i++){
       		if(tenantStatus===defaultTenantStatusOptions[i].value){
       			return defaultTenantStatusOptions[i].label;
-      		}
-      	}
-      },
-      formatYcdkType(ycdkType){
-      	for(let i=0;i<defaultYcdkTypeOptions.length;i++){
-      		if(ycdkType===defaultYcdkTypeOptions[i].value){
-      			return defaultYcdkTypeOptions[i].label;
       		}
       	}
       },

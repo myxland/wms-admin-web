@@ -91,6 +91,33 @@ export const constantRouterMap = [
         component: () => import('@/views/tenant/tenantAccount/update'),
         meta: {title: '修改租户账户', icon: 'tenantAccount-add'},
         hidden: true
+      },
+      {
+        path: 'tenantSms',
+        name: 'tenantSms',
+        component: () => import('@/views/tenant/tenantSms/index'),
+        meta: {title: '租户短信配置列表', icon: 'tenantSms-list'}
+      },
+      {
+        path: 'addTenantSms',
+        name: 'addTenantSms',
+        component: () => import('@/views/tenant/tenantSms/add'),
+        meta: {title: '添加租户短信配置', icon: 'tenantSms-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantSms',
+        name: 'viewTenantSms',
+        component: () => import('@/views/tenant/tenantSms/view'),
+        meta: {title: '查看租户短信配置', icon: 'tenantSms-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantSms',
+        name: 'updateTenantSms',
+        component: () => import('@/views/tenant/tenantSms/update'),
+        meta: {title: '修改租户短信配置', icon: 'tenantSms-add'},
+        hidden: true
       }
     ]
   },

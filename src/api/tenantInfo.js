@@ -36,19 +36,3 @@ export function updateTenantInfo(id,data) {
     data:data
   })
 }
-
-export function updatePartChargeOn(data) {
-  return request({
-    url:'/tenantInfo/update/partChargeOn',
-    method:'post',
-    data:data
-  })
-}
-
-export function updateOverDuefineOn(data) {
-  return request({
-    url:'/tenantInfo/update/overDuefineOn',
-    method:'post',
-    data:data
-  })
-}

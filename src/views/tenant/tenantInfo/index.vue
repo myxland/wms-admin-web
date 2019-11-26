@@ -30,7 +30,7 @@
               <el-input style="width: 203px" v-model="listQuery.displayNameLike" placeholder="显示名称"></el-input>
             </el-form-item>
             <el-form-item label="联系人：">
-              <el-input style="width: 203px" v-model="listQuery.tenantLinkman" placeholder="联系人"></el-input>
+              <el-input style="width: 203px" v-model="listQuery.tenantContact" placeholder="联系人"></el-input>
             </el-form-item>
             <el-form-item label="手机号码：">
               <el-input style="width: 203px" v-model="listQuery.tenantMobile" placeholder="手机号码"></el-input>
@@ -118,7 +118,7 @@
           <template slot-scope="scope">{{scope.row.displayName}}</template>
         </el-table-column>
         <el-table-column label="联系人" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.tenantLinkman}}</template>
+          <template slot-scope="scope">{{scope.row.tenantContact}}</template>
         </el-table-column>
         <el-table-column label="手机号码" width="120" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantMobile}}</template>
@@ -131,26 +131,6 @@
         </el-table-column>
         <el-table-column label="到期日期" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.endDate | formatDate}}</template>
-        </el-table-column>
-        <el-table-column label="是否启用部分缴费" width="100" align="left" header-align="center">
-          <template slot-scope="scope">
-            <el-switch
-              @change="handlePartChargeOnChange(scope.$index, scope.row)"
-              :active-value="1"
-              :inactive-value="0"
-              v-model="scope.row.partChargeOn">
-            </el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column label="是否启用违约金" width="100" align="left" header-align="center">
-          <template slot-scope="scope">
-            <el-switch
-              @change="handleOverDuefineOnChange(scope.$index, scope.row)"
-              :active-value="1"
-              :inactive-value="0"
-              v-model="scope.row.overDuefineOn">
-            </el-switch>
-          </template>
         </el-table-column>
         <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
@@ -206,9 +186,8 @@
   </div>
 </template>
 <script>
-  import {fetchList, deleteTenantInfo, updatePartChargeOn, updateOverDuefineOn} from '@/api/tenantInfo'
+  import {fetchList, deleteTenantInfo} from '@/api/tenantInfo'
   import {formatDate} from '@/utils/date';
-  import accounting from 'accounting';
   const defaultListQuery = {
     pageNum: 1,
     pageSize: 10,
@@ -231,18 +210,7 @@
     regTimeEnd: null,
     endDate: null,
     endDateStart: null,
-    endDateEnd: null,
-    creditNumber: null,
-    invoiceAddress: null,
-    bankNo: null,
-    bankName: null,
-    accountNo: null,
-    partChargeOn: null,
-    overDuefineOn: null,
-    overDuefineDay: null,
-    overDuefineRatio: null,
-    overDuefineTopRatio: null,
-    ycdkType: null
+    endDateEnd: null
   };
   const defaultTenantTypeOptions=[
     {
@@ -268,36 +236,6 @@
       label: '试用'
     }
   ];
-  const defaultPartChargeOnOptions=[
-    {
-      value: 1,
-      label: '启用'
-    },
-    {
-      value: 0,
-      label: '不启用'
-    }
-  ];
-  const defaultOverDuefineOnOptions=[
-    {
-      value: 1,
-      label: '启用'
-    },
-    {
-      value: 0,
-      label: '不启用'
-    }
-  ];
-  const defaultYcdkTypeOptions=[
-    {
-      value: 1,
-      label: '抄表后即时抵扣'
-    },
-    {
-      value: 2,
-      label: '人工发起抵扣'
-    }
-  ];
   
   export default {
     name: 'tenantInfoList',
@@ -312,9 +250,6 @@
         listLoading: true,
         tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
         tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
-        partChargeOnOptions: Object.assign({},defaultPartChargeOnOptions),
-        overDuefineOnOptions: Object.assign({},defaultOverDuefineOnOptions),
-        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         multipleSelection: []
       }
     },
@@ -336,10 +271,6 @@
         let date = new Date(time);
         return formatDate(date, 'yyyy-MM-dd')
       },
-      formatMoney(money){
-        // 指定货币符号、保留小数位、千位间隔符
-        return accounting.formatMoney(money,'',2,'');
-      },
       formatTenantType(tenantType){
         for(let i=0;i<defaultTenantTypeOptions.length;i++){
           if(tenantType===defaultTenantTypeOptions[i].value){
@@ -351,27 +282,6 @@
         for(let i=0;i<defaultTenantStatusOptions.length;i++){
           if(tenantStatus===defaultTenantStatusOptions[i].value){
             return defaultTenantStatusOptions[i].label;
-          }
-        }
-      },
-      formatPartChargeOn(partChargeOn){
-        for(let i=0;i<defaultPartChargeOnOptions.length;i++){
-          if(partChargeOn===defaultPartChargeOnOptions[i].value){
-            return defaultPartChargeOnOptions[i].label;
-          }
-        }
-      },
-      formatOverDuefineOn(overDuefineOn){
-        for(let i=0;i<defaultOverDuefineOnOptions.length;i++){
-          if(overDuefineOn===defaultOverDuefineOnOptions[i].value){
-            return defaultOverDuefineOnOptions[i].label;
-          }
-        }
-      },
-      formatYcdkType(ycdkType){
-        for(let i=0;i<defaultYcdkTypeOptions.length;i++){
-          if(ycdkType===defaultYcdkTypeOptions[i].value){
-            return defaultYcdkTypeOptions[i].label;
           }
         }
       },
@@ -419,44 +329,6 @@
         this.listQuery.pageNum = 1;
         this.listQuery.pageSize = val;
         this.getList();
-      },
-      handlePartChargeOnChange(index, row) {
-        let data = new URLSearchParams();
-        ;
-        data.append("ids", row.id);
-        data.append("partChargeOn", row.partChargeOn);
-        updatePartChargeOn(data).then(response => {
-          this.$message({
-            message: '修改成功',
-            type: 'success',
-            duration: 1000
-          });
-        }).catch(error => {
-          if (row.partChargeOn === 0) {
-            row.partChargeOn = 1;
-          } else {
-            row.partChargeOn = 0;
-          }
-        });
-      },
-      handleOverDuefineOnChange(index, row) {
-        let data = new URLSearchParams();
-        ;
-        data.append("ids", row.id);
-        data.append("overDuefineOn", row.overDuefineOn);
-        updateOverDuefineOn(data).then(response => {
-          this.$message({
-            message: '修改成功',
-            type: 'success',
-            duration: 1000
-          });
-        }).catch(error => {
-          if (row.overDuefineOn === 0) {
-            row.overDuefineOn = 1;
-          } else {
-            row.overDuefineOn = 0;
-          }
-        });
       },
       handleCurrentChange(val) {
         this.listQuery.pageNum = val;

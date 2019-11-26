@@ -22,8 +22,8 @@
       <el-form-item label="联系地址：" prop="tenantAddress">
         <el-input v-model="tenantInfo.tenantAddress"></el-input>
       </el-form-item>
-      <el-form-item label="联系人：" prop="tenantLinkman">
-        <el-input v-model="tenantInfo.tenantLinkman"></el-input>
+      <el-form-item label="联系人：" prop="tenantContact">
+        <el-input v-model="tenantInfo.tenantContact"></el-input>
       </el-form-item>
       <el-form-item label="手机号码：" prop="tenantMobile">
         <el-input v-model="tenantInfo.tenantMobile"></el-input>
@@ -80,56 +80,6 @@
                 placeholder="请选择到期日期">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="税号：" prop="creditNumber">
-        <el-input v-model="tenantInfo.creditNumber"></el-input>
-      </el-form-item>
-      <el-form-item label="开票地址：" prop="invoiceAddress">
-        <el-input v-model="tenantInfo.invoiceAddress"></el-input>
-      </el-form-item>
-      <el-form-item label="开户行行号：" prop="bankNo">
-        <el-input v-model="tenantInfo.bankNo"></el-input>
-      </el-form-item>
-      <el-form-item label="开户行名称：" prop="bankName">
-        <el-input v-model="tenantInfo.bankName"></el-input>
-      </el-form-item>
-      <el-form-item label="开户账号：" prop="accountNo">
-        <el-input v-model="tenantInfo.accountNo"></el-input>
-      </el-form-item>
-      <el-form-item label="是否启用部分缴费：" prop="partChargeOn">
-        <el-switch
-          v-model="tenantInfo.partChargeOn"
-          :active-value="1"
-          :inactive-value="0">
-        </el-switch>
-      </el-form-item>
-      <el-form-item label="是否启用违约金：" prop="overDuefineOn">
-        <el-switch
-          v-model="tenantInfo.overDuefineOn"
-          :active-value="1"
-          :inactive-value="0">
-        </el-switch>
-      </el-form-item>
-      <el-form-item label="违约金宽限天数：" prop="overDuefineDay">
-        <el-input-number v-model="tenantInfo.overDuefineDay" :min="0" placeholder="违约金宽限天数"></el-input-number>
-      </el-form-item>
-      <el-form-item label="违约金每天收取比例：" prop="overDuefineRatio">
-        <el-input-number v-model="tenantInfo.overDuefineRatio" :min="0" :max="1" precision="4" placeholder="违约金每天收取比例"></el-input-number>
-      </el-form-item>
-      <el-form-item label="违约金封顶比例：" prop="overDuefineTopRatio">
-        <el-input-number v-model="tenantInfo.overDuefineTopRatio" :min="0" :max="1" precision="4" placeholder="违约金封顶比例"></el-input-number>
-      </el-form-item>
-      <el-form-item label="预存抵扣方式：" prop="ycdkType" clearable>
-        <el-select
-          v-model="tenantInfo.ycdkType"
-          placeholder="请选择预存抵扣方式">
-          <el-option
-            v-for="item in ycdkTypeOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </el-form-item>      
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantInfoFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('tenantInfoFrom')">重置</el-button>
@@ -148,7 +98,7 @@
     tenantCity: '',
     tenantArea: '',
     tenantAddress: '',
-    tenantLinkman: '',
+    tenantContact: '',
     tenantMobile: '',
     tenantTel: '',
     tenantEmail: '',
@@ -156,18 +106,7 @@
     tenantType: '',
     tenantStatus: '',
     regTime: '',
-    endDate: '',
-    creditNumber: '',
-    invoiceAddress: '',
-    bankNo: '',
-    bankName: '',
-    accountNo: '',
-    partChargeOn: 1,
-    overDuefineOn: 1,
-    overDuefineDay: 0,
-    overDuefineRatio: null,
-    overDuefineTopRatio: null,
-    ycdkType: ''
+    endDate: ''
   };
   const defaultTenantTypeOptions=[
     {
@@ -193,16 +132,6 @@
       label: '试用'
     }
   ];
-  const defaultYcdkTypeOptions=[
-    {
-      value: 1,
-      label: '抄表后即时抵扣'
-    },
-    {
-      value: 2,
-      label: '人工发起抵扣'
-    }
-  ];
   export default {
     name: 'TenantInfoDetail',
     components:{SingleUpload},
@@ -217,7 +146,6 @@
         tenantInfo:Object.assign({}, defaultTenantInfo),
         tenantTypeOptions: Object.assign({},defaultTenantTypeOptions),
         tenantStatusOptions: Object.assign({},defaultTenantStatusOptions),
-        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         rules: {
           tenantName: [
             {required: true, message: '请输入租户名称', trigger: 'blur'}
