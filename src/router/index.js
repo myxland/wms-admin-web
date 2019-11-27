@@ -66,6 +66,33 @@ export const constantRouterMap = [
         hidden: true
       },
       {
+        path: 'tenantConfig',
+        name: 'tenantConfig',
+        component: () => import('@/views/tenant/tenantConfig/index'),
+        meta: {title: '租户基础配置列表', icon: 'tenantConfig-list'}
+      },
+      {
+        path: 'addTenantConfig',
+        name: 'addTenantConfig',
+        component: () => import('@/views/tenant/tenantConfig/add'),
+        meta: {title: '添加租户基础配置', icon: 'tenantConfig-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantConfig',
+        name: 'viewTenantConfig',
+        component: () => import('@/views/tenant/tenantConfig/view'),
+        meta: {title: '查看租户基础配置', icon: 'tenantConfig-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantConfig',
+        name: 'updateTenantConfig',
+        component: () => import('@/views/tenant/tenantConfig/update'),
+        meta: {title: '修改租户基础配置', icon: 'tenantConfig-add'},
+        hidden: true
+      },
+      {
         path: 'tenantAccount',
         name: 'tenantAccount',
         component: () => import('@/views/tenant/tenantAccount/index'),

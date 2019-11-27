@@ -5,7 +5,7 @@
         <el-input v-model="tenantAccount.id" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item label="租户：" prop="tenantId">
-        <el-select v-model="tenantAccount.tenantId" placeholder="请选择租户" clearable>
+        <el-select v-model="tenantAccount.tenantId" :disabled="true" placeholder="请选择租户" clearable>
                 <el-option
                   v-for="item in tenantInfoOptions"
                   :key="item.value"
@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="账户余额：" prop="accountBalance">
-        <el-input v-model="tenantAccount.accountBalance"></el-input>
+        <el-input-number v-model="tenantAccount.accountBalance" :min="0" precision="2" :disabled="true"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantAccountFrom')">提交</el-button>
@@ -25,7 +25,7 @@
   </el-card>
 </template>
 <script>
-  import {createTenantAccount, getTenantAccount, updateTenantAccount} from '@/api/tenantAccount'
+  import {createTenantAccount, getTenantAccount, getTenantAccountByTenantId, updateTenantAccount} from '@/api/tenantAccount'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
   import SingleUpload from '@/components/Upload/singleUpload'
   const defaultTenantAccount={
@@ -51,9 +51,16 @@
     },
     created() {
       if (this.isEdit) {
-        getTenantAccount(this.$route.query.id).then(response => {
-          this.tenantAccount = response.data;
-        });
+        if (this.$route.query.id) {
+          getTenantAccount(this.$route.query.id).then(response => {
+            this.tenantAccount = response.data;
+          });
+        }
+        if (this.$route.query.tenantId) {
+          getTenantAccountByTenantId(this.$route.query.tenantId).then(response => {
+            this.tenantAccount = response.data;
+          });
+        }        
       }else{
         this.tenantAccount = Object.assign({},defaultTenantAccount);
       }
@@ -61,7 +68,7 @@
     },
     methods: {
       getTenantInfoList() {
-        fetchTenantInfoList({pageNum:1,pageSize:100}).then(response => {
+        fetchTenantInfoList({pageNum:1,pageSize:1000}).then(response => {
           this.tenantInfoOptions = [];
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){

@@ -29,6 +29,13 @@ export function getTenantAccount(id) {
   })
 }
 
+export function getTenantAccountByTenantId(tenantId) {
+  return request({
+    url:'/tenantAccount/tenantId/'+tenantId,
+    method:'get',
+  })
+}
+
 export function updateTenantAccount(id,data) {
   return request({
     url:'/tenantAccount/update/'+id,
