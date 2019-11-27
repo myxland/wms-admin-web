@@ -47,7 +47,7 @@
         </el-select>
       </el-form-item>      
       <el-form-item label="指定价格：" prop="price">
-        <el-input-number v-model="tenantPriceDetail.price" label="指定价格" precision="2"></el-input-number>
+        <el-input-number v-model="tenantPriceDetail.price" label="指定价格" :precision="2"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantPriceDetailFrom')">提交</el-button>

@@ -44,7 +44,7 @@
         <el-input-number v-model="tenantPriceStep.endNum" label="起始量"></el-input-number>
       </el-form-item>
       <el-form-item label="价格：" prop="price">
-        <el-input-number v-model="tenantPriceStep.price" label="价格" precision="2"></el-input-number>
+        <el-input-number v-model="tenantPriceStep.price" label="价格" :precision="2"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantPriceStepFrom')">提交</el-button>

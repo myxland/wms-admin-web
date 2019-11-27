@@ -32,10 +32,10 @@
         <el-input-number v-model="tenantConfig.overDuefineDay" :min="0" placeholder="违约金宽限天数"></el-input-number>
       </el-form-item>
       <el-form-item label="违约金每天收取比例：" prop="overDuefineRatio">
-        <el-input-number v-model="tenantConfig.overDuefineRatio" :min="0" :max="1" precision="4" placeholder="违约金每天收取比例"></el-input-number>
+        <el-input-number v-model="tenantConfig.overDuefineRatio" :min="0" :max="1" :precision="4" placeholder="违约金每天收取比例"></el-input-number>
       </el-form-item>
       <el-form-item label="违约金封顶比例：" prop="overDuefineTopRatio">
-        <el-input-number v-model="tenantConfig.overDuefineTopRatio" :min="0" :max="1" precision="4" placeholder="违约金封顶比例"></el-input-number>
+        <el-input-number v-model="tenantConfig.overDuefineTopRatio" :min="0" :max="1" :precision="4" placeholder="违约金封顶比例"></el-input-number>
       </el-form-item>
       <el-form-item label="预存抵扣方式：" prop="ycdkType" clearable>
         <el-select

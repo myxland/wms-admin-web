@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="账户余额：" prop="accountBalance">
-        <el-input-number v-model="tenantAccount.accountBalance" :min="0" precision="2" :disabled="true"></el-input-number>
+        <el-input-number v-model="tenantAccount.accountBalance" :min="0" :precision="2" :disabled="true"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('tenantAccountFrom')">提交</el-button>
