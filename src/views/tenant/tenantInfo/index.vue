@@ -132,7 +132,7 @@
         <el-table-column label="到期日期" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.endDate | formatDate}}</template>
         </el-table-column>
-        <el-table-column label="操作" width="360" align="center">
+        <el-table-column label="操作" width="580" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -149,6 +149,18 @@
             <el-button
               size="mini"
               @click="handleUpdateTenantAccount(scope.$index, scope.row)">账户
+            </el-button>
+            <el-button
+              size="mini"
+              @click="handleUpdateTenantSms(scope.$index, scope.row)">短信
+            </el-button>
+            <el-button
+              size="mini"
+              @click="handleUpdateTenantInvoice(scope.$index, scope.row)">发票
+            </el-button>
+            <el-button
+              size="mini"
+              @click="handleUpdateTenantBill(scope.$index, scope.row)">账单
             </el-button>
             <el-button
               size="mini"
@@ -338,6 +350,15 @@
       },
       handleUpdateTenantConfig(index, row) {
         this.$router.push({path: '/tenant/updateTenantConfig', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantSms(index, row) {
+        this.$router.push({path: '/tenant/updateTenantSms', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantInvoice(index, row) {
+        this.$router.push({path: '/tenant/updateTenantInvoice', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantBill(index, row) {
+        this.$router.push({path: '/tenant/updateTenantBill', query: {tenantId: row.id}})
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

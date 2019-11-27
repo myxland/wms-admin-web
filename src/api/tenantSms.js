@@ -29,6 +29,13 @@ export function getTenantSms(id) {
   })
 }
 
+export function getTenantSmsByTenantId(tenantId) {
+  return request({
+    url:'/tenantSms/tenantId/'+tenantId,
+    method:'get',
+  })
+}
+
 export function updateTenantSms(id,data) {
   return request({
     url:'/tenantSms/update/'+id,

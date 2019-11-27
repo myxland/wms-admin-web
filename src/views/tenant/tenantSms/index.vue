@@ -294,7 +294,7 @@
         });
       },
       getTenantInfoList() {
-        fetchTenantInfoList({pageNum:1,pageSize:100}).then(response => {
+        fetchTenantInfoList({pageNum:1,pageSize:500}).then(response => {
           this.tenantInfoOptions = [];
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){

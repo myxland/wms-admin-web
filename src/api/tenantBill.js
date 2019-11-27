@@ -29,6 +29,13 @@ export function getTenantBill(id) {
   })
 }
 
+export function getTenantBillByTenantId(tenantId) {
+  return request({
+    url:'/tenantBill/tenantId/'+tenantId,
+    method:'get',
+  })
+}
+
 export function updateTenantBill(id,data) {
   return request({
     url:'/tenantBill/update/'+id,

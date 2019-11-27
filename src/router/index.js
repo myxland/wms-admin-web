@@ -145,6 +145,60 @@ export const constantRouterMap = [
         component: () => import('@/views/tenant/tenantSms/update'),
         meta: {title: '修改租户短信配置', icon: 'tenantSms-add'},
         hidden: true
+      },
+      {
+        path: 'tenantInvoice',
+        name: 'tenantInvoice',
+        component: () => import('@/views/tenant/tenantInvoice/index'),
+        meta: {title: '租户发票配置列表', icon: 'tenantInvoice-list'}
+      },
+      {
+        path: 'addTenantInvoice',
+        name: 'addTenantInvoice',
+        component: () => import('@/views/tenant/tenantInvoice/add'),
+        meta: {title: '添加租户发票配置', icon: 'tenantInvoice-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantInvoice',
+        name: 'viewTenantInvoice',
+        component: () => import('@/views/tenant/tenantInvoice/view'),
+        meta: {title: '查看租户发票配置', icon: 'tenantInvoice-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantInvoice',
+        name: 'updateTenantInvoice',
+        component: () => import('@/views/tenant/tenantInvoice/update'),
+        meta: {title: '修改租户发票配置', icon: 'tenantInvoice-add'},
+        hidden: true
+      },
+      {
+        path: 'tenantBill',
+        name: 'tenantBill',
+        component: () => import('@/views/tenant/tenantBill/index'),
+        meta: {title: '租户账单配置列表', icon: 'tenantBill-list'}
+      },
+      {
+        path: 'addTenantBill',
+        name: 'addTenantBill',
+        component: () => import('@/views/tenant/tenantBill/add'),
+        meta: {title: '添加租户账单配置', icon: 'tenantBill-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantBill',
+        name: 'viewTenantBill',
+        component: () => import('@/views/tenant/tenantBill/view'),
+        meta: {title: '查看租户账单配置', icon: 'tenantBill-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantBill',
+        name: 'updateTenantBill',
+        component: () => import('@/views/tenant/tenantBill/update'),
+        meta: {title: '修改租户账单配置', icon: 'tenantBill-add'},
+        hidden: true
       }
     ]
   },
