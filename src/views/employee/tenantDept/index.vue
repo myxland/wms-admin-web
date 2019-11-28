@@ -20,6 +20,25 @@
         </div>
         <div style="margin-top: 15px">
           <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
+            <el-form-item label="系统ID：">
+              <el-input style="width: 203px" v-model="listQuery.id" placeholder="系统ID"></el-input>
+            </el-form-item>
+            <el-form-item label="上级部门：">
+              <el-input style="width: 203px" v-model="listQuery.parentDeptId" placeholder="上级部门"></el-input>
+            </el-form-item>
+            <el-form-item label="租户：">
+              <el-select v-model="listQuery.tenantId" placeholder="请选择租户" :disabled="this.$route.query.tenantId?true:false" clearable>
+                <el-option
+                  v-for="item in tenantInfoOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="部门名称：">
+              <el-input style="width: 203px" v-model="listQuery.deptName" placeholder="部门名称"></el-input>
+            </el-form-item>
           </el-form>
         </div>
     </el-card>
@@ -33,18 +52,6 @@
         添加
       </el-button>
     </el-card>
-    <el-tree
-         :props="props"
-          ref="tree"
-          lazy
-          :load="loadNode"
-          node-key="id"
-          :expand-on-click-node="false"
-    >
-          <span class="tree-node" slot-scope="{ node, data }" :title="data.name">
-            <span>{{ data.name }}</span>
-          </span>
-    </el-tree>
     <div class="table-container">
       <el-table ref="tenantDeptTable"
                 :data="list"
@@ -53,20 +60,24 @@
                 v-loading="listLoading"
                 border>
         <el-table-column type="selection" width="60" align="center"></el-table-column>
-        <el-table-column label="系统ID" width="100" align="left" header-align="center">
+        <el-table-column label="系统ID" width="180" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="上级部门" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.parentDeptId}}</template>
         </el-table-column>
-        <el-table-column label="租户" width="100" align="left" header-align="center">
+        <el-table-column label="租户" width="280" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantName}}</template>
         </el-table-column>
-        <el-table-column label="部门名称" width="100" align="left" header-align="center">
+        <el-table-column label="部门名称" width="" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.deptName}}</template>
         </el-table-column>
-        <el-table-column label="操作" width="200" align="center">
+        <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleView(scope.$index, scope.row)">查看
+            </el-button>
             <el-button
               size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
@@ -115,7 +126,7 @@
   </div>
 </template>
 <script>
-  import {fetchList, fetchRootList, deleteTenantDept} from '@/api/tenantDept'
+  import {fetchList, deleteTenantDept} from '@/api/tenantDept'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
   const defaultListQuery = {
     pageNum: 1,
@@ -130,15 +141,11 @@
     name: 'tenantDeptList',
     data() {
       return {
-        props: {
-          label: 'name',
-          children: 'child',
-          isLeaf: 'leaf'
-        },
         operates: [
         ],
         operateType: null,
-        listQuery:Object.assign({},defaultListQuery),
+        tenantId: null,
+        listQuery:Object.assign({},defaultListQuery,this.$route.query),
         list: null,
         total: null,
         listLoading: true,
@@ -149,6 +156,11 @@
     created() {
       this.getList();
       this.getTenantInfoList();
+      let tenantId = this.$route.query.tenantId;
+      if(tenantId){
+        this.tenantId = tenantId;
+        this.listQuery.tenantId = tenantId;
+      }
     },
     filters:{
     },
@@ -164,7 +176,7 @@
         });
       },
       getTenantInfoList() {
-        fetchTenantInfoList({pageNum:1,pageSize:100}).then(response => {
+        fetchTenantInfoList({pageNum:1,pageSize:500}).then(response => {
           this.tenantInfoOptions = [];
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){
@@ -172,46 +184,17 @@
           }
         });
       },
-      loadNode(node, resolve) {
-        console.log(node)
-        // console.log(resolve)
-        if (node.level === 0) {
-          fetchRootList({pageNum:1,pageSize:100}).then(response => {
-            var rootData = [];
-            let tenantDeptList = response.data.list;
-            for(let i=0;i<tenantDeptList.length;i++){
-              rootData.push({name:tenantDeptList[i].id+"_"+tenantDeptList[i].tenantName+"_"+tenantDeptList[i].deptName,id:tenantDeptList[i].id});
-            }
-            return resolve(rootData);
-
-          });
-
-          //return resolve([{ name: '第一级', id: '1' }, { name: '第一级02', id: '2' }])
-          // 这里resolve的数据是后台给的,id用于之后点击发起请求时的参数
-        } else {
-          this.getTreeChild(node.data.id, resolve)
-        }
-      },
-      getTreeChild(id, resolve) {
-        fetchList({pageNum:1,pageSize:100,parentDeptId:id}).then(response => {
-            var rootData = [];
-            let tenantDeptList = response.data.list;
-            for(let i=0;i<tenantDeptList.length;i++){
-              rootData.push({name:tenantDeptList[i].id+"_"+tenantDeptList[i].tenantName+"_"+tenantDeptList[i].deptName,id:tenantDeptList[i].id});
-            }
-            return resolve(rootData);
-
-        });
-        
-      },
       handleResetSearch() {
-        this.listQuery = Object.assign({}, defaultListQuery);
+        this.listQuery = Object.assign({}, defaultListQuery, this.$route.query);
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
+      handleView(index, row) {
+        this.$router.push({path: '/employee/viewTenantDept', query: {id: row.id, tenantId:this.tenantId}})
+      },
       handleUpdate(index, row) {
-        this.$router.push({path: '/mbg/updateTenantDept', query: {id: row.id}})
+        this.$router.push({path: '/employee/updateTenantDept', query: {id: row.id, tenantId:this.tenantId}})
       },
       handleDelete(index, row) {
         this.$confirm('是否要删除该租户部门', '提示', {
@@ -260,7 +243,7 @@
         data.append("ids", ids);
       },
       addTenantDept() {
-        this.$router.push({path: '/mbg/addTenantDept'})
+        this.$router.push({path: '/employee/addTenantDept', query: {tenantId:this.tenantId}})
       }
     }
   }

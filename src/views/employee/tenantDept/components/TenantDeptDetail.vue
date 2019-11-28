@@ -8,7 +8,7 @@
         <el-input v-model="tenantDept.parentDeptId"></el-input>
       </el-form-item>
       <el-form-item label="租户：" prop="tenantId">
-        <el-select v-model="tenantDept.tenantId" placeholder="请选择租户" clearable>
+        <el-select v-model="tenantDept.tenantId" placeholder="请选择租户" :disabled="this.$route.query.tenantId?true:false" clearable>
                 <el-option
                   v-for="item in tenantInfoOptions"
                   :key="item.value"
@@ -47,7 +47,7 @@
     },
     data() {
       return {
-        tenantDept:Object.assign({}, defaultTenantDept),
+        tenantDept:Object.assign({}, defaultTenantDept, this.$route.query),
         tenantInfoOptions:[],
         rules: {
           tenantId: [
@@ -61,17 +61,25 @@
     },
     created() {
       if (this.isEdit) {
-        getTenantDept(this.$route.query.id).then(response => {
-          this.tenantDept = response.data;
-        });
+      	if (this.$route.query.id) {
+          	getTenantDept(this.$route.query.id).then(response => {
+	          this.tenantDept = response.data;
+        	});
+        }
+        else if (this.$route.query.tenantId) {
+          getTenantDeptByTenantId(this.$route.query.tenantId).then(response => {
+	          this.tenantDept = response.data;
+        	});
+        }
+        
       }else{
-        this.tenantDept = Object.assign({},defaultTenantDept);
+        this.tenantDept = Object.assign({},defaultTenantDept,this.$route.query);
       }
       this.getTenantInfoList();
     },
     methods: {
       getTenantInfoList() {
-        fetchTenantInfoList({pageNum:1,pageSize:100}).then(response => {
+        fetchTenantInfoList({pageNum:1,pageSize:500}).then(response => {
           this.tenantInfoOptions = [];
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){

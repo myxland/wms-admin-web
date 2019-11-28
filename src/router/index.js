@@ -257,6 +257,41 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/employee',
+    component: Layout,
+    redirect: '/employee/tenantDept',
+    name: 'employee',
+    meta: {title: '租户部门', icon: 'tenantDept'},
+    children: [{
+      path: 'tenantDept',
+      name: 'tenantDept',
+      component: () => import('@/views/employee/tenantDept/index'),
+      meta: {title: '租户部门列表', icon: 'tenantDept-list'}
+    },
+      {
+        path: 'addTenantDept',
+        name: 'addTenantDept',
+        component: () => import('@/views/employee/tenantDept/add'),
+        meta: {title: '添加租户部门', icon: 'tenantDept-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantDept',
+        name: 'viewTenantDept',
+        component: () => import('@/views/employee/tenantDept/view'),
+        meta: {title: '查看租户部门', icon: 'tenantDept-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantDept',
+        name: 'updateTenantDept',
+        component: () => import('@/views/employee/tenantDept/update'),
+        meta: {title: '修改租户部门', icon: 'tenantDept-add'},
+        hidden: true
+      }
+    ]
+  }, 
+  {
     path: '/mbg',
     component: Layout,
     redirect: '/mbg/tenantSms',
@@ -479,35 +514,7 @@ export const constantRouterMap = [
         hidden: true
       }
     ]
-  },
-  {
-    path: '/mbg',
-    component: Layout,
-    redirect: '/mbg/tenantDept',
-    name: 'mbg',
-    meta: {title: '租户部门', icon: 'tenantDept'},
-    children: [{
-      path: 'tenantDept',
-      name: 'tenantDept',
-      component: () => import('@/views/mbg/tenantDept/index'),
-      meta: {title: '租户部门列表', icon: 'tenantDept-list'}
-    },
-      {
-        path: 'addTenantDept',
-        name: 'addTenantDept',
-        component: () => import('@/views/mbg/tenantDept/add'),
-        meta: {title: '添加租户部门', icon: 'tenantDept-add'},
-        hidden: true
-      },
-      {
-        path: 'updateTenantDept',
-        name: 'updateTenantDept',
-        component: () => import('@/views/mbg/tenantDept/update'),
-        meta: {title: '修改租户部门', icon: 'tenantDept-add'},
-        hidden: true
-      }
-    ]
-  },
+  },  
   {
     path: '/mbg',
     component: Layout,

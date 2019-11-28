@@ -7,14 +7,6 @@ export function fetchList(params) {
   })
 }
 
-export function fetchRootList(params) {
-  return request({
-    url:'/tenantDept/listRoot',
-    method:'get',
-    params:params
-  })
-}
-
 export function createTenantDept(data) {
   return request({
     url:'/tenantDept/create',
