@@ -164,6 +164,10 @@
             </el-button>
             <el-button
               size="mini"
+              @click="handleUpdateTenantCustType(scope.$index, scope.row)">用户类型
+            </el-button>
+            <el-button
+              size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除
             </el-button>
@@ -359,6 +363,9 @@
       },
       handleUpdateTenantBill(index, row) {
         this.$router.push({path: '/tenant/updateTenantBill', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantCustType(index, row) {
+        this.$router.push({path: '/tenant/tenantCustType', query: {tenantId: row.id}})
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

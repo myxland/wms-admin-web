@@ -199,6 +199,33 @@ export const constantRouterMap = [
         component: () => import('@/views/tenant/tenantBill/update'),
         meta: {title: '修改租户账单配置', icon: 'tenantBill-add'},
         hidden: true
+      },
+      {
+        path: 'tenantCustType',
+        name: 'tenantCustType',
+        component: () => import('@/views/tenant/tenantCustType/index'),
+        meta: {title: '用户类型列表', icon: 'tenantCustType-list'}
+      },
+      {
+        path: 'addTenantCustType',
+        name: 'addTenantCustType',
+        component: () => import('@/views/tenant/tenantCustType/add'),
+        meta: {title: '添加用户类型', icon: 'tenantCustType-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustType',
+        name: 'viewTenantCustType',
+        component: () => import('@/views/tenant/tenantCustType/view'),
+        meta: {title: '查看用户类型', icon: 'tenantCustType-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustType',
+        name: 'updateTenantCustType',
+        component: () => import('@/views/tenant/tenantCustType/update'),
+        meta: {title: '修改用户类型', icon: 'tenantCustType-add'},
+        hidden: true
       }
     ]
   },
