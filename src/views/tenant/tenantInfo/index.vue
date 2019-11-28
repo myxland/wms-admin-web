@@ -168,6 +168,10 @@
             </el-button>
             <el-button
               size="mini"
+              @click="handleUpdateTenantWaterType(scope.$index, scope.row)">用水类型
+            </el-button>
+            <el-button
+              size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除
             </el-button>
@@ -366,6 +370,9 @@
       },
       handleUpdateTenantCustType(index, row) {
         this.$router.push({path: '/tenant/tenantCustType', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantWaterType(index, row) {
+        this.$router.push({path: '/tenant/tenantWaterType', query: {tenantId: row.id}})
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

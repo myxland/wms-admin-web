@@ -226,6 +226,33 @@ export const constantRouterMap = [
         component: () => import('@/views/tenant/tenantCustType/update'),
         meta: {title: '修改用户类型', icon: 'tenantCustType-add'},
         hidden: true
+      },
+      {
+        path: 'tenantWaterType',
+        name: 'tenantWaterType',
+        component: () => import('@/views/tenant/tenantWaterType/index'),
+        meta: {title: '用水类型列表', icon: 'tenantWaterType-list'}
+      },
+      {
+        path: 'addTenantWaterType',
+        name: 'addTenantWaterType',
+        component: () => import('@/views/tenant/tenantWaterType/add'),
+        meta: {title: '添加用水类型', icon: 'tenantWaterType-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantWaterType',
+        name: 'viewTenantWaterType',
+        component: () => import('@/views/tenant/tenantWaterType/view'),
+        meta: {title: '查看用水类型', icon: 'tenantWaterType-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantWaterType',
+        name: 'updateTenantWaterType',
+        component: () => import('@/views/tenant/tenantWaterType/update'),
+        meta: {title: '修改用水类型', icon: 'tenantWaterType-add'},
+        hidden: true
       }
     ]
   },
