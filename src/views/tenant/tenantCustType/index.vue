@@ -84,7 +84,27 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>    
+    </div>
+    <div class="batch-operate-container">
+      <el-select
+        size="small"
+        v-model="operateType" placeholder="批量操作">
+        <el-option
+          v-for="item in operates"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button
+        style="margin-left: 20px"
+        class="search-button"
+        @click="handleBatchOperate()"
+        type="primary"
+        size="small">
+        确定
+      </el-button>
+    </div>
     <div class="pagination-container">
       <el-pagination
         background
@@ -158,7 +178,7 @@
         });
       },
       handleResetSearch() {
-        this.listQuery = Object.assign({}, defaultListQuery,this.$route.query);
+        this.listQuery = Object.assign({}, defaultListQuery, this.$route.query);
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;

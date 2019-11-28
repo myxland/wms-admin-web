@@ -43,7 +43,7 @@
     },
     data() {
       return {
-        tenantCustType:Object.assign({}, defaultTenantCustType,this.$route.query),
+        tenantCustType:Object.assign({}, defaultTenantCustType, this.$route.query),
         tenantInfoOptions:[],
         rules: {
           tenantId: [
