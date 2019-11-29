@@ -14,7 +14,7 @@
       	{{tenantEmployee.empPassword}}
       </el-form-item>
       <el-form-item label="员工部门：" prop="deptId">
-      	{{tenantEmployee.deptId}}
+      	{{tenantEmployee.deptName}}
       </el-form-item>
       <el-form-item label="可登录系统：" prop="loginOn">
         <el-switch

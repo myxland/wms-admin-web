@@ -40,7 +40,14 @@
               <el-input style="width: 203px" v-model="listQuery.empPassword" placeholder="登录密码"></el-input>
             </el-form-item>
             <el-form-item label="员工部门：">
-              <el-input style="width: 203px" v-model="listQuery.deptId" placeholder="员工部门"></el-input>
+              <el-select v-model="listQuery.deptId" placeholder="请选择员工部门" :disabled="this.$route.query.deptId?true:false" clearable>
+                <el-option
+                  v-for="item in tenantDeptOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="可登录系统：">
               <el-select v-model="listQuery.loginOn" placeholder="全部" clearable>
@@ -108,7 +115,7 @@
           <template slot-scope="scope">{{scope.row.empPassword}}</template>
         </el-table-column>
         <el-table-column label="员工部门" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.deptId}}</template>
+          <template slot-scope="scope">{{scope.row.deptName}}</template>
         </el-table-column>
         <el-table-column label="可登录系统" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.loginOn | formatLoginOn}}</template>
@@ -184,6 +191,7 @@
 <script>
   import {fetchList, deleteTenantEmployee} from '@/api/tenantEmployee'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
+  import {fetchList as fetchTenantDeptList} from '@/api/tenantDept';
   const defaultListQuery = {
     pageNum: 1,
     pageSize: 10,
@@ -239,12 +247,14 @@
         loginOnOptions: Object.assign({},defaultLoginOnOptions),
         empStatusOptions: Object.assign({},defaultEmpStatusOptions),
         tenantInfoOptions:[],
+        tenantDeptOptions:[],
         multipleSelection: []
       }
     },
     created() {
       this.getList();
       this.getTenantInfoList();
+      this.getTenantDeptList();
       let tenantId = this.$route.query.tenantId;
       if(tenantId){
         this.tenantId = tenantId;
@@ -284,6 +294,15 @@
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){
             this.tenantInfoOptions.push({label:tenantInfoList[i].tenantName,value:tenantInfoList[i].id});
+          }
+        });
+      },
+      getTenantDeptList() {
+        fetchTenantDeptList({pageNum:1,pageSize:500}).then(response => {
+          this.tenantDeptOptions = [];
+          let tenantDeptList = response.data.list;
+          for(let i=0;i<tenantDeptList.length;i++){
+            this.tenantDeptOptions.push({label:tenantDeptList[i].deptName,value:tenantDeptList[i].id});
           }
         });
       },

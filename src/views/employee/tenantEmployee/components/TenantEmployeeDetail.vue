@@ -21,7 +21,14 @@
         <el-input v-model="tenantEmployee.empPassword"></el-input>
       </el-form-item>
       <el-form-item label="员工部门：" prop="deptId">
-        <el-input v-model="tenantEmployee.deptId"></el-input>
+        <el-select v-model="tenantEmployee.deptId" placeholder="请选择员工部门" :disabled="this.$route.query.deptId?true:false" clearable>
+                <el-option
+                  v-for="item in tenantDeptOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="可登录系统：" prop="loginOn">
         <el-switch
@@ -64,6 +71,7 @@
 <script>
   import {createTenantEmployee, getTenantEmployee, updateTenantEmployee} from '@/api/tenantEmployee'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
+  import {fetchList as fetchTenantDeptList} from '@/api/tenantDept';
   import SingleUpload from '@/components/Upload/singleUpload'
   const defaultTenantEmployee={
     tenantId: '',
@@ -104,6 +112,7 @@
       return {
         tenantEmployee:Object.assign({}, defaultTenantEmployee, this.$route.query),
         tenantInfoOptions:[],
+        tenantDeptOptions:[],
         empStatusOptions: Object.assign({},defaultEmpStatusOptions),
         rules: {
           tenantId: [
@@ -135,6 +144,7 @@
         this.tenantEmployee = Object.assign({},defaultTenantEmployee,this.$route.query);
       }
       this.getTenantInfoList();
+      this.getTenantDeptList();
     },
     methods: {
       getTenantInfoList() {
@@ -143,6 +153,15 @@
           let tenantInfoList = response.data.list;
           for(let i=0;i<tenantInfoList.length;i++){
             this.tenantInfoOptions.push({label:tenantInfoList[i].tenantName,value:tenantInfoList[i].id});
+          }
+        });
+      },
+      getTenantDeptList() {
+        fetchTenantDeptList({pageNum:1,pageSize:500}).then(response => {
+          this.tenantDeptOptions = [];
+          let tenantDeptList = response.data.list;
+          for(let i=0;i<tenantDeptList.length;i++){
+            this.tenantDeptOptions.push({label:tenantDeptList[i].deptName,value:tenantDeptList[i].id});
           }
         });
       },
