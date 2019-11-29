@@ -6,7 +6,7 @@
           <span>筛选搜索</span>
           <el-button
             style="float: right"
-            @click="searchTenantConfigList()"
+            @click="searchTenantRoleList()"
             type="primary"
             size="small">
             查询结果
@@ -20,11 +20,11 @@
         </div>
         <div style="margin-top: 15px">
           <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
-            <el-form-item label="租户编号：">
-              <el-input style="width: 203px" v-model="listQuery.id" placeholder="租户编号"></el-input>
+            <el-form-item label="系统ID：">
+              <el-input style="width: 203px" v-model="listQuery.id" placeholder="系统ID"></el-input>
             </el-form-item>
             <el-form-item label="租户：">
-              <el-select v-model="listQuery.tenantId" placeholder="请选择租户" clearable>
+              <el-select v-model="listQuery.tenantId" placeholder="请选择租户" :disabled="this.$route.query.tenantId?true:false" clearable>
                 <el-option
                   v-for="item in tenantInfoOptions"
                   :key="item.value"
@@ -33,44 +33,11 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="是否启用部分缴费：">
-              <el-select v-model="listQuery.partChargeOn" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in partChargeOnOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
+            <el-form-item label="角色名称：">
+              <el-input style="width: 203px" v-model="listQuery.roleName" placeholder="角色名称"></el-input>
             </el-form-item>
-            <el-form-item label="是否启用违约金：">
-              <el-select v-model="listQuery.overDuefineOn" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in overDuefineOnOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="违约金宽限天数：">
-              <el-input style="width: 203px" v-model="listQuery.overDuefineDay" placeholder="违约金宽限天数"></el-input>
-            </el-form-item>
-            <el-form-item label="违约金每天收取比例：">
-              <el-input style="width: 203px" v-model="listQuery.overDuefineRatio" placeholder="违约金每天收取比例"></el-input>
-            </el-form-item>
-            <el-form-item label="违约金封顶比例：">
-              <el-input style="width: 203px" v-model="listQuery.overDuefineTopRatio" placeholder="违约金封顶比例"></el-input>
-            </el-form-item>
-            <el-form-item label="预存抵扣方式：">
-              <el-select v-model="listQuery.ycdkType" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in ycdkTypeOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
+            <el-form-item label="角色说明：">
+              <el-input style="width: 203px" v-model="listQuery.roleRemark" placeholder="角色说明"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -80,42 +47,30 @@
       <span>数据列表</span>
       <el-button
         class="btn-add"
-        @click="addTenantConfig()"
+        @click="addTenantRole()"
         size="mini">
         添加
       </el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="tenantConfigTable"
+      <el-table ref="tenantRoleTable"
                 :data="list"
                 style="width: 100%"
                 @selection-change="handleSelectionChange"
                 v-loading="listLoading"
                 border>
         <el-table-column type="selection" width="60" align="center"></el-table-column>
-        <el-table-column label="租户编号" width="180" align="left" header-align="center">
+        <el-table-column label="系统ID" width="180" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="租户" width="280" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantName}}</template>
         </el-table-column>
-        <el-table-column label="是否启用部分缴费" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.partChargeOn | formatPartChargeOn}}</template>
+        <el-table-column label="角色名称" width="" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.roleName}}</template>
         </el-table-column>
-        <el-table-column label="是否启用违约金" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.overDuefineOn | formatOverDuefineOn}}</template>
-        </el-table-column>
-        <el-table-column label="违约金宽限天数" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.overDuefineDay}}</template>
-        </el-table-column>
-        <el-table-column label="违约金每天收取比例" width="100" align="right" header-align="center">
-          <template slot-scope="scope">{{scope.row.overDuefineRatio}}</template>
-        </el-table-column>
-        <el-table-column label="违约金封顶比例" width="100" align="right" header-align="center">
-          <template slot-scope="scope">{{scope.row.overDuefineTopRatio}}</template>
-        </el-table-column>
-        <el-table-column label="预存抵扣方式" width="" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.ycdkType | formatYcdkType}}</template>
+        <el-table-column label="角色说明" width="100" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.roleRemark}}</template>
         </el-table-column>
         <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
@@ -171,66 +126,29 @@
   </div>
 </template>
 <script>
-  import {fetchList, deleteTenantConfig} from '@/api/tenantConfig'
+  import {fetchList, deleteTenantRole} from '@/api/tenantRole'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
-  import accounting from 'accounting';
   const defaultListQuery = {
     pageNum: 1,
     pageSize: 10,
     id: null,
     tenantId: null,
-    partChargeOn: null,
-    overDuefineOn: null,
-    overDuefineDay: null,
-    overDuefineRatio: null,
-    overDuefineTopRatio: null,
-    ycdkType: null
+    roleName: null,
+    roleRemark: null
   };
-  const defaultPartChargeOnOptions=[
-    {
-      value: 1,
-      label: '启用'
-    },
-    {
-      value: 0,
-      label: '不启用'
-    }
-  ];
-  const defaultOverDuefineOnOptions=[
-    {
-      value: 1,
-      label: '启用'
-    },
-    {
-      value: 0,
-      label: '不启用'
-    }
-  ];
-  const defaultYcdkTypeOptions=[
-    {
-      value: 1,
-      label: '抄表后即时抵扣'
-    },
-    {
-      value: 2,
-      label: '人工发起抵扣'
-    }
-  ];
   
   export default {
-    name: 'tenantConfigList',
+    name: 'tenantRoleList',
     data() {
       return {
         operates: [
         ],
         operateType: null,
-        listQuery:Object.assign({},defaultListQuery),
+        tenantId: null,
+        listQuery:Object.assign({},defaultListQuery,this.$route.query),
         list: null,
         total: null,
         listLoading: true,
-        partChargeOnOptions: Object.assign({},defaultPartChargeOnOptions),
-        overDuefineOnOptions: Object.assign({},defaultOverDuefineOnOptions),
-        ycdkTypeOptions: Object.assign({},defaultYcdkTypeOptions),
         tenantInfoOptions:[],
         multipleSelection: []
       }
@@ -238,33 +156,13 @@
     created() {
       this.getList();
       this.getTenantInfoList();
+      let tenantId = this.$route.query.tenantId;
+      if(tenantId){
+        this.tenantId = tenantId;
+        this.listQuery.tenantId = tenantId;
+      }
     },
     filters:{
-      formatMoney(money){
-        // 指定货币符号、保留小数位、千位间隔符
-        return accounting.formatMoney(money,'',2,'');
-      },
-      formatPartChargeOn(partChargeOn){
-        for(let i=0;i<defaultPartChargeOnOptions.length;i++){
-          if(partChargeOn===defaultPartChargeOnOptions[i].value){
-            return defaultPartChargeOnOptions[i].label;
-          }
-        }
-      },
-      formatOverDuefineOn(overDuefineOn){
-        for(let i=0;i<defaultOverDuefineOnOptions.length;i++){
-          if(overDuefineOn===defaultOverDuefineOnOptions[i].value){
-            return defaultOverDuefineOnOptions[i].label;
-          }
-        }
-      },
-      formatYcdkType(ycdkType){
-        for(let i=0;i<defaultYcdkTypeOptions.length;i++){
-          if(ycdkType===defaultYcdkTypeOptions[i].value){
-            return defaultYcdkTypeOptions[i].label;
-          }
-        }
-      },
     },
     methods: {
       getList() {
@@ -287,24 +185,24 @@
         });
       },
       handleResetSearch() {
-        this.listQuery = Object.assign({}, defaultListQuery);
+        this.listQuery = Object.assign({}, defaultListQuery, this.$route.query);
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
       handleView(index, row) {
-        this.$router.push({path: '/tenant/viewTenantConfig', query: {id: row.id}})
+        this.$router.push({path: '/employee/viewTenantRole', query: {id: row.id, tenantId:this.tenantId}})
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/tenant/updateTenantConfig', query: {id: row.id}})
+        this.$router.push({path: '/employee/updateTenantRole', query: {id: row.id, tenantId:this.tenantId}})
       },
       handleDelete(index, row) {
-        this.$confirm('是否要删除该租户基础配置', '提示', {
+        this.$confirm('是否要删除该租户角色', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          deleteTenantConfig(row.id).then(response => {
+          deleteTenantRole(row.id).then(response => {
             this.$message({
               message: '删除成功',
               type: 'success',
@@ -323,7 +221,7 @@
         this.listQuery.pageNum = val;
         this.getList();
       },
-      searchTenantConfigList() {
+      searchTenantRoleList() {
         this.listQuery.pageNum = 1;
         this.getList();
       },
@@ -344,8 +242,8 @@
         let data = new URLSearchParams();
         data.append("ids", ids);
       },
-      addTenantConfig() {
-        this.$router.push({path: '/tenant/addTenantConfig'})
+      addTenantRole() {
+        this.$router.push({path: '/employee/addTenantRole', query: {tenantId:this.tenantId}})
       }
     }
   }

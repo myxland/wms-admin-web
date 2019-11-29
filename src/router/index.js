@@ -316,6 +316,33 @@ export const constantRouterMap = [
         component: () => import('@/views/employee/tenantDept/update'),
         meta: {title: '修改租户部门', icon: 'tenantDept-add'},
         hidden: true
+      },
+      {
+        path: 'tenantRole',
+        name: 'tenantRole',
+        component: () => import('@/views/employee/tenantRole/index'),
+        meta: {title: '租户角色列表', icon: 'tenantRole-list'}
+      },
+      {
+        path: 'addTenantRole',
+        name: 'addTenantRole',
+        component: () => import('@/views/employee/tenantRole/add'),
+        meta: {title: '添加租户角色', icon: 'tenantRole-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantRole',
+        name: 'viewTenantRole',
+        component: () => import('@/views/employee/tenantRole/view'),
+        meta: {title: '查看租户角色', icon: 'tenantRole-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantRole',
+        name: 'updateTenantRole',
+        component: () => import('@/views/employee/tenantRole/update'),
+        meta: {title: '修改租户角色', icon: 'tenantRole-add'},
+        hidden: true
       }
     ]
   }, 
