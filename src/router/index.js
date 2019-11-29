@@ -259,15 +259,43 @@ export const constantRouterMap = [
   {
     path: '/employee',
     component: Layout,
-    redirect: '/employee/tenantDept',
+    redirect: '/employee/tenantEmployee',
     name: 'employee',
-    meta: {title: '租户部门', icon: 'tenantDept'},
-    children: [{
+    meta: {title: '租户员工', icon: 'tenantEmployee'},
+    children: [
+      {
+        path: 'tenantEmployee',
+        name: 'tenantEmployee',
+        component: () => import('@/views/employee/tenantEmployee/index'),
+        meta: {title: '租户员工列表', icon: 'tenantEmployee-list'}
+      },
+      {
+        path: 'addTenantEmployee',
+        name: 'addTenantEmployee',
+        component: () => import('@/views/employee/tenantEmployee/add'),
+        meta: {title: '添加租户员工', icon: 'tenantEmployee-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantEmployee',
+        name: 'viewTenantEmployee',
+        component: () => import('@/views/employee/tenantEmployee/view'),
+        meta: {title: '查看租户员工', icon: 'tenantEmployee-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantEmployee',
+        name: 'updateTenantEmployee',
+        component: () => import('@/views/employee/tenantEmployee/update'),
+        meta: {title: '修改租户员工', icon: 'tenantEmployee-add'},
+        hidden: true
+      },
+      {
       path: 'tenantDept',
       name: 'tenantDept',
       component: () => import('@/views/employee/tenantDept/index'),
       meta: {title: '租户部门列表', icon: 'tenantDept-list'}
-    },
+      },
       {
         path: 'addTenantDept',
         name: 'addTenantDept',
