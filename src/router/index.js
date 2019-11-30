@@ -379,6 +379,41 @@ export const constantRouterMap = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/module',
+    component: Layout,
+    redirect: '/module/tenantModule',
+    name: 'module',
+    meta: {title: '租户模块', icon: 'tenantModule'},
+    children: [{
+      path: 'tenantModule',
+      name: 'tenantModule',
+      component: () => import('@/views/module/tenantModule/index'),
+      meta: {title: '租户模块列表', icon: 'tenantModule-list'}
+    },
+      {
+        path: 'addTenantModule',
+        name: 'addTenantModule',
+        component: () => import('@/views/module/tenantModule/add'),
+        meta: {title: '添加租户模块', icon: 'tenantModule-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantModule',
+        name: 'viewTenantModule',
+        component: () => import('@/views/module/tenantModule/view'),
+        meta: {title: '查看租户模块', icon: 'tenantModule-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantModule',
+        name: 'updateTenantModule',
+        component: () => import('@/views/module/tenantModule/update'),
+        meta: {title: '修改租户模块', icon: 'tenantModule-add'},
+        hidden: true
+      }
+    ]
   }, 
   {
     path: '/mbg',
