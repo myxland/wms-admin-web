@@ -14,11 +14,11 @@
                 </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="模块显示名称：" prop="moduleDisplayName">
+      <el-form-item label="显示名称：" prop="moduleDisplayName">
         <el-input v-model="tenantModule.moduleDisplayName"></el-input>
       </el-form-item>
-      <el-form-item label="模块排序：" prop="moduleOrder">
-        <el-input-number v-model="tenantModule.moduleOrder" :min="0" placeholder="模块排序"></el-input-number>
+      <el-form-item label="排序：" prop="moduleOrder">
+        <el-input-number v-model="tenantModule.moduleOrder" :min="0" placeholder="排序"></el-input-number>
       </el-form-item>
       <el-form-item label="开通版本：" prop="moduleEdition" clearable>
         <el-select
@@ -32,7 +32,7 @@
           </el-option>
         </el-select>
       </el-form-item>      
-      <el-form-item label="模块状态：" prop="moduleStatus">
+      <el-form-item label="状态：" prop="moduleStatus">
         <el-switch
           v-model="tenantModule.moduleStatus"
           :active-value="1"
@@ -153,7 +153,7 @@
             {required: true, message: '请输入租户编号', trigger: 'blur'}
           ],
           moduleDisplayName: [
-            {required: true, message: '请输入模块显示名称', trigger: 'blur'}
+            {required: true, message: '请输入显示名称', trigger: 'blur'}
           ]
         }
       }

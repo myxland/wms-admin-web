@@ -7,16 +7,16 @@
       <el-form-item label="租户：" prop="tenantId">
         {{tenantModule.tenantName}}
       </el-form-item>
-      <el-form-item label="模块显示名称：" prop="moduleDisplayName">
+      <el-form-item label="显示名称：" prop="moduleDisplayName">
       	{{tenantModule.moduleDisplayName}}
       </el-form-item>
-      <el-form-item label="模块排序：" prop="moduleOrder">
+      <el-form-item label="排序：" prop="moduleOrder">
       	{{tenantModule.moduleOrder}}
       </el-form-item>
       <el-form-item label="开通版本：" prop="moduleEdition" clearable>
         {{tenantModule.moduleEdition | formatModuleEdition}}
       </el-form-item>      
-      <el-form-item label="模块状态：" prop="moduleStatus">
+      <el-form-item label="状态：" prop="moduleStatus">
         <el-switch
           v-model="tenantModule.moduleStatus"
           :active-value="1"

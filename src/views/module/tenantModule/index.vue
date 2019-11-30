@@ -33,11 +33,8 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="模块显示名称：">
-              <el-input style="width: 203px" v-model="listQuery.moduleDisplayName" placeholder="模块显示名称"></el-input>
-            </el-form-item>
-            <el-form-item label="模块排序：">
-              <el-input style="width: 203px" v-model="listQuery.moduleOrder" placeholder="模块排序"></el-input>
+            <el-form-item label="显示名称：">
+              <el-input style="width: 203px" v-model="listQuery.moduleDisplayNameLike" placeholder="显示名称"></el-input>
             </el-form-item>
             <el-form-item label="开通版本：">
               <el-select v-model="listQuery.moduleEdition" placeholder="全部" clearable>
@@ -49,7 +46,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="模块状态：">
+            <el-form-item label="状态：">
               <el-select v-model="listQuery.moduleStatus" placeholder="全部" clearable>
                 <el-option
                   v-for="item in moduleStatusOptions"
@@ -117,12 +114,6 @@
                 placeholder="请选择时间">
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="欠费金额：">
-              <el-input style="width: 203px" v-model="listQuery.moduleArrears" placeholder="欠费金额"></el-input>
-            </el-form-item>
-            <el-form-item label="透支额度：">
-              <el-input style="width: 203px" v-model="listQuery.moduleOverdraft" placeholder="透支额度"></el-input>
-            </el-form-item>
           </el-form>
         </div>
     </el-card>
@@ -150,16 +141,13 @@
         <el-table-column label="租户" width="280" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantName}}</template>
         </el-table-column>
-        <el-table-column label="模块显示名称" width="100" align="left" header-align="center">
+        <el-table-column label="显示名称" width="" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.moduleDisplayName}}</template>
-        </el-table-column>
-        <el-table-column label="模块排序" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.moduleOrder}}</template>
         </el-table-column>
         <el-table-column label="开通版本" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.moduleEdition | formatModuleEdition}}</template>
         </el-table-column>
-        <el-table-column label="模块状态" width="100" align="left" header-align="center">
+        <el-table-column label="状态" width="100" align="left" header-align="center">
           <template slot-scope="scope">
             <el-switch
               @change="handleModuleStatusChange(scope.$index, scope.row)"
@@ -180,12 +168,6 @@
         </el-table-column>
         <el-table-column label="开始计费日期" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.moduleStartChargeDate | formatDate}}</template>
-        </el-table-column>
-        <el-table-column label="欠费金额" width="100" align="right" header-align="center">
-          <template slot-scope="scope">{{scope.row.moduleArrears | formatMoney}}</template>
-        </el-table-column>
-        <el-table-column label="透支额度" width="100" align="right" header-align="center">
-          <template slot-scope="scope">{{scope.row.moduleOverdraft | formatMoney}}</template>
         </el-table-column>
         <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
@@ -250,7 +232,7 @@
     pageSize: 10,
     id: null,
     tenantId: null,
-    moduleDisplayName: null,
+    moduleDisplayNameLike: null,
     moduleOrder: null,
     moduleEdition: null,
     moduleStatus: null,
