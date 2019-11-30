@@ -6,7 +6,7 @@
           <span>筛选搜索</span>
           <el-button
             style="float: right"
-            @click="searchTenantEmployeeList()"
+            @click="searchTenantEmployeeRoleList()"
             type="primary"
             size="small">
             查询结果
@@ -33,42 +33,22 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="员工名称：">
-              <el-input style="width: 203px" v-model="listQuery.empName" placeholder="员工名称"></el-input>
-            </el-form-item>            
-            <el-form-item label="员工部门：">
-              <el-select v-model="listQuery.deptId" placeholder="请选择员工部门" :disabled="this.$route.query.deptId?true:false" clearable>
+            <el-form-item label="员工编号：">
+              <el-input style="width: 203px" v-model="listQuery.empId" placeholder="员工编号"></el-input>
+            </el-form-item>
+            <el-form-item label="角色编号：">
+              <el-input style="width: 203px" v-model="listQuery.roleId" placeholder="角色编号"></el-input>
+            </el-form-item>
+            <el-form-item label="开放：">
+              <el-select v-model="listQuery.empRoleOn" placeholder="全部" clearable>
                 <el-option
-                  v-for="item in tenantDeptOptions"
+                  v-for="item in empRoleOnOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="可登录系统：">
-              <el-select v-model="listQuery.loginOn" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in loginOnOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="员工状态：">
-              <el-select v-model="listQuery.empStatus" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in empStatusOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="员工手机号：">
-              <el-input style="width: 203px" v-model="listQuery.empMobile" placeholder="员工手机号"></el-input>
-            </el-form-item>            
           </el-form>
         </div>
     </el-card>
@@ -77,13 +57,13 @@
       <span>数据列表</span>
       <el-button
         class="btn-add"
-        @click="addTenantEmployee()"
+        @click="addTenantEmployeeRole()"
         size="mini">
         添加
       </el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="tenantEmployeeTable"
+      <el-table ref="tenantEmployeeRoleTable"
                 :data="list"
                 style="width: 100%"
                 @selection-change="handleSelectionChange"
@@ -96,22 +76,16 @@
         <el-table-column label="租户" width="280" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.tenantName}}</template>
         </el-table-column>
-        <el-table-column label="员工名称" width="" align="left" header-align="center">
+        <el-table-column label="员工名称" width="200" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.empName}}</template>
-        </el-table-column>       
-        <el-table-column label="员工部门" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.deptName}}</template>
         </el-table-column>
-        <el-table-column label="可登录系统" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.loginOn | formatLoginOn}}</template>
+        <el-table-column label="角色名称" width="200" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.roleName}}</template>
         </el-table-column>
-        <el-table-column label="员工状态" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.empStatus | formatEmpStatus}}</template>
+        <el-table-column label="开放" width="" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.empRoleOn | formatEmpRoleOn}}</template>
         </el-table-column>
-        <el-table-column label="员工手机号" width="120" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.empMobile}}</template>
-        </el-table-column>       
-        <el-table-column label="操作" width="300" align="center">
+        <el-table-column label="操作" width="220" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -120,10 +94,6 @@
             <el-button
               size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
-            </el-button>
-            <el-button
-              size="mini"
-              @click="handleUpdateRole(scope.$index, scope.row)">角色
             </el-button>
             <el-button
               size="mini"
@@ -169,51 +139,30 @@
   </div>
 </template>
 <script>
-  import {fetchList, deleteTenantEmployee} from '@/api/tenantEmployee'
+  import {fetchList, deleteTenantEmployeeRole} from '@/api/tenantEmployeeRole'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
-  import {fetchList as fetchTenantDeptList} from '@/api/tenantDept';
   const defaultListQuery = {
     pageNum: 1,
     pageSize: 10,
     id: null,
     tenantId: null,
-    empName: null,
-    empPassword: null,
-    deptId: null,
-    loginOn: null,
-    empStatus: null,
-    empMobile: null,
-    empEmail: null,
-    empPersonalWx: null,
-    empEnterpriceWx: null
+    empId: null,
+    roleId: null,
+    empRoleOn: null
   };
-  const defaultLoginOnOptions=[
+  const defaultEmpRoleOnOptions=[
     {
       value: 1,
-      label: '可登录'
+      label: '开放'
     },
     {
       value: 0,
-      label: '不能登录'
-    }
-  ];
-  const defaultEmpStatusOptions=[
-    {
-      value: 1,
-      label: '在职'
-    },
-    {
-      value: 2,
-      label: '离职'
-    },
-    {
-      value: 3,
-      label: '禁用'
+      label: '不开放'
     }
   ];
   
   export default {
-    name: 'tenantEmployeeList',
+    name: 'tenantEmployeeRoleList',
     data() {
       return {
         operates: [
@@ -224,17 +173,14 @@
         list: null,
         total: null,
         listLoading: true,
-        loginOnOptions: Object.assign({},defaultLoginOnOptions),
-        empStatusOptions: Object.assign({},defaultEmpStatusOptions),
+        empRoleOnOptions: Object.assign({},defaultEmpRoleOnOptions),
         tenantInfoOptions:[],
-        tenantDeptOptions:[],
         multipleSelection: []
       }
     },
     created() {
       this.getList();
       this.getTenantInfoList();
-      this.getTenantDeptList();
       let tenantId = this.$route.query.tenantId;
       if(tenantId){
         this.tenantId = tenantId;
@@ -242,17 +188,10 @@
       }
     },
     filters:{
-      formatLoginOn(loginOn){
-        for(let i=0;i<defaultLoginOnOptions.length;i++){
-          if(loginOn===defaultLoginOnOptions[i].value){
-            return defaultLoginOnOptions[i].label;
-          }
-        }
-      },
-      formatEmpStatus(empStatus){
-        for(let i=0;i<defaultEmpStatusOptions.length;i++){
-          if(empStatus===defaultEmpStatusOptions[i].value){
-            return defaultEmpStatusOptions[i].label;
+      formatEmpRoleOn(empRoleOn){
+        for(let i=0;i<defaultEmpRoleOnOptions.length;i++){
+          if(empRoleOn===defaultEmpRoleOnOptions[i].value){
+            return defaultEmpRoleOnOptions[i].label;
           }
         }
       },
@@ -277,15 +216,6 @@
           }
         });
       },
-      getTenantDeptList() {
-        fetchTenantDeptList({pageNum:1,pageSize:500}).then(response => {
-          this.tenantDeptOptions = [];
-          let tenantDeptList = response.data.list;
-          for(let i=0;i<tenantDeptList.length;i++){
-            this.tenantDeptOptions.push({label:tenantDeptList[i].deptName,value:tenantDeptList[i].id});
-          }
-        });
-      },
       handleResetSearch() {
         this.listQuery = Object.assign({}, defaultListQuery, this.$route.query);
       },
@@ -293,21 +223,18 @@
         this.multipleSelection = val;
       },
       handleView(index, row) {
-        this.$router.push({path: '/employee/viewTenantEmployee', query: {id: row.id, tenantId:this.tenantId}})
+        this.$router.push({path: '/employee/viewTenantEmployeeRole', query: {id: row.id, tenantId:this.tenantId}})
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/employee/updateTenantEmployee', query: {id: row.id, tenantId:this.tenantId}})
-      },
-      handleUpdateRole(index, row) {
-        this.$router.push({path: '/employee/updateTenantEmployeeRole', query: {id: row.id, tenantId:row.tenantId}})
+        this.$router.push({path: '/employee/updateTenantEmployeeRole', query: {id: row.id, tenantId:this.tenantId}})
       },
       handleDelete(index, row) {
-        this.$confirm('是否要删除该租户员工', '提示', {
+        this.$confirm('是否要删除该员工角色', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          deleteTenantEmployee(row.id).then(response => {
+          deleteTenantEmployeeRole(row.id).then(response => {
             this.$message({
               message: '删除成功',
               type: 'success',
@@ -326,7 +253,7 @@
         this.listQuery.pageNum = val;
         this.getList();
       },
-      searchTenantEmployeeList() {
+      searchTenantEmployeeRoleList() {
         this.listQuery.pageNum = 1;
         this.getList();
       },
@@ -347,8 +274,8 @@
         let data = new URLSearchParams();
         data.append("ids", ids);
       },
-      addTenantEmployee() {
-        this.$router.push({path: '/employee/addTenantEmployee', query: {tenantId:this.tenantId}})
+      addTenantEmployeeRole() {
+        this.$router.push({path: '/employee/addTenantEmployeeRole', query: {tenantId:this.tenantId}})
       }
     }
   }

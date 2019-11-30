@@ -343,6 +343,40 @@ export const constantRouterMap = [
         component: () => import('@/views/employee/tenantRole/update'),
         meta: {title: '修改租户角色', icon: 'tenantRole-add'},
         hidden: true
+      },
+      {
+        path: 'tenantEmployeeRole',
+        name: 'tenantEmployeeRole',
+        component: () => import('@/views/employee/tenantEmployeeRole/index'),
+        meta: {title: '员工角色列表', icon: 'tenantEmployeeRole-list'}
+      },
+      {
+        path: 'addTenantEmployeeRole',
+        name: 'addTenantEmployeeRole',
+        component: () => import('@/views/employee/tenantEmployeeRole/add'),
+        meta: {title: '添加员工角色', icon: 'tenantEmployeeRole-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantEmployeeRole',
+        name: 'viewTenantEmployeeRole',
+        component: () => import('@/views/employee/tenantEmployeeRole/view'),
+        meta: {title: '查看员工角色', icon: 'tenantEmployeeRole-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantEmployeeRole',
+        name: 'updateTenantEmployeeRole',
+        component: () => import('@/views/employee/tenantEmployee/updateRole'),
+        meta: {title: '修改员工角色', icon: 'tenantEmployeeRole-add'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantRoleEmployee',
+        name: 'updateTenantRoleEmployee',
+        component: () => import('@/views/employee/tenantRole/updateEmployee'),
+        meta: {title: '修改角色员工', icon: 'tenantEmployeeRole-add'},
+        hidden: true
       }
     ]
   }, 

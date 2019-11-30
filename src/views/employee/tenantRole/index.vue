@@ -72,7 +72,7 @@
         <el-table-column label="角色说明" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.roleRemark}}</template>
         </el-table-column>
-        <el-table-column label="操作" width="220" align="center">
+        <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -81,6 +81,10 @@
             <el-button
               size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+              size="mini"
+              @click="handleUpdateEmployee(scope.$index, scope.row)">用户
             </el-button>
             <el-button
               size="mini"
@@ -195,6 +199,9 @@
       },
       handleUpdate(index, row) {
         this.$router.push({path: '/employee/updateTenantRole', query: {id: row.id, tenantId:this.tenantId}})
+      },
+      handleUpdateEmployee(index, row) {
+        this.$router.push({path: '/employee/updateTenantRoleEmployee', query: {id: row.id, tenantId:row.tenantId}})
       },
       handleDelete(index, row) {
         this.$confirm('是否要删除该租户角色', '提示', {

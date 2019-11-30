@@ -15,6 +15,30 @@ export function createTenantEmployeeRole(data) {
   })
 }
 
+export function createBatchTenantEmployeeRole(data) {
+  return request({
+    url:'/tenantEmployeeRole/createBatch',
+    method:'post',
+    data:data
+  })
+}
+
+export function createBatchTenantEmployeeRoleByEmpId(empId,data) {
+  return request({
+    url:'/tenantEmployeeRole/createBatch/employee/'+empId,
+    method:'post',
+    data:data
+  })
+}
+
+export function createBatchTenantEmployeeRoleByRoleId(roleId,data) {
+  return request({
+    url:'/tenantEmployeeRole/createBatch/role/'+roleId,
+    method:'post',
+    data:data
+  })
+}
+
 export function deleteTenantEmployeeRole(id) {
   return request({
     url:'/tenantEmployeeRole/delete/'+id,
