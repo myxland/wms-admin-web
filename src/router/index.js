@@ -379,6 +379,41 @@ export const constantRouterMap = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/module',
+    component: Layout,
+    redirect: '/module/moduleInfo',
+    name: 'module',
+    meta: {title: '模块信息', icon: 'moduleInfo'},
+    children: [{
+      path: 'moduleInfo',
+      name: 'moduleInfo',
+      component: () => import('@/views/module/moduleInfo/index'),
+      meta: {title: '模块信息列表', icon: 'moduleInfo-list'}
+    },
+      {
+        path: 'addModuleInfo',
+        name: 'addModuleInfo',
+        component: () => import('@/views/module/moduleInfo/add'),
+        meta: {title: '添加模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'viewModuleInfo',
+        name: 'viewModuleInfo',
+        component: () => import('@/views/module/moduleInfo/view'),
+        meta: {title: '查看模块信息', icon: 'moduleInfo-view'},
+        hidden: true
+      },
+      {
+        path: 'updateModuleInfo',
+        name: 'updateModuleInfo',
+        component: () => import('@/views/module/moduleInfo/update'),
+        meta: {title: '修改模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      }
+    ]
   },  
   {
     path: '/mbg',
