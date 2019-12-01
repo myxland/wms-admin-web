@@ -253,6 +253,33 @@ export const constantRouterMap = [
         component: () => import('@/views/tenant/tenantWaterType/update'),
         meta: {title: '修改用水类型', icon: 'tenantWaterType-add'},
         hidden: true
+      },
+      {
+        path: 'tenantModule',
+        name: 'tenantModule',
+        component: () => import('@/views/tenant/tenantModule/index'),
+        meta: {title: '租户模块列表', icon: 'tenantModule-list'}
+      },
+      {
+        path: 'addTenantModule',
+        name: 'addTenantModule',
+        component: () => import('@/views/tenant/tenantModule/add'),
+        meta: {title: '添加租户模块', icon: 'tenantModule-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantModule',
+        name: 'viewTenantModule',
+        component: () => import('@/views/tenant/tenantModule/view'),
+        meta: {title: '查看租户模块', icon: 'tenantModule-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantModule',
+        name: 'updateTenantModule',
+        component: () => import('@/views/tenant/tenantModule/update'),
+        meta: {title: '修改租户模块', icon: 'tenantModule-add'},
+        hidden: true
       }
     ]
   },
@@ -391,7 +418,7 @@ export const constantRouterMap = [
       name: 'moduleInfo',
       component: () => import('@/views/module/moduleInfo/index'),
       meta: {title: '模块信息列表', icon: 'moduleInfo-list'}
-    },
+      },
       {
         path: 'addModuleInfo',
         name: 'addModuleInfo',
@@ -411,6 +438,33 @@ export const constantRouterMap = [
         name: 'updateModuleInfo',
         component: () => import('@/views/module/moduleInfo/update'),
         meta: {title: '修改模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'moduleMenu',
+        name: 'moduleMenu',
+        component: () => import('@/views/module/moduleMenu/index'),
+        meta: {title: '模块菜单列表', icon: 'moduleMenu-list'}
+      },
+      {
+        path: 'addModuleMenu',
+        name: 'addModuleMenu',
+        component: () => import('@/views/module/moduleMenu/add'),
+        meta: {title: '添加模块菜单', icon: 'moduleMenu-add'},
+        hidden: true
+      },
+      {
+        path: 'viewModuleMenu',
+        name: 'viewModuleMenu',
+        component: () => import('@/views/module/moduleMenu/view'),
+        meta: {title: '查看模块菜单', icon: 'moduleMenu-view'},
+        hidden: true
+      },
+      {
+        path: 'updateModuleMenu',
+        name: 'updateModuleMenu',
+        component: () => import('@/views/module/moduleMenu/update'),
+        meta: {title: '修改模块菜单', icon: 'moduleMenu-add'},
         hidden: true
       }
     ]
