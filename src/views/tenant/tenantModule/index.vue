@@ -426,7 +426,7 @@
         this.$router.push({path: '/tenant/viewTenantModule', query: {id: row.id, tenantId:this.tenantId, moduleId:this.moduleId}})
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/tenant/updateTenantModule', query: {id: row.id, tenantId:this.tenantId}})
+        this.$router.push({path: '/tenant/updateTenantModuleMoreDetail', query: {id: row.id, tenantId:row.tenantId, moduleId:row.moduleId}})
       },
       handleDelete(index, row) {
         this.$confirm('是否要删除该租户模块', '提示', {

@@ -66,6 +66,13 @@ export const constantRouterMap = [
         hidden: true
       },
       {
+        path: 'updateTenantModule',
+        name: 'updateTenantModule',
+        component: () => import('@/views/tenant/tenantInfo/updateModule'),
+        meta: {title: '修改租户模块', icon: 'tenantModule-add'},
+        hidden: true
+      },
+      {
         path: 'tenantConfig',
         name: 'tenantConfig',
         component: () => import('@/views/tenant/tenantConfig/index'),
@@ -275,8 +282,8 @@ export const constantRouterMap = [
         hidden: true
       },
       {
-        path: 'updateTenantModule',
-        name: 'updateTenantModule',
+        path: 'updateTenantModuleMoreDetail',
+        name: 'updateTenantModuleMoreDetail',
         component: () => import('@/views/tenant/tenantModule/update'),
         meta: {title: '修改租户模块', icon: 'tenantModule-add'},
         hidden: true
@@ -403,6 +410,33 @@ export const constantRouterMap = [
         name: 'updateTenantRoleEmployee',
         component: () => import('@/views/employee/tenantRole/updateEmployee'),
         meta: {title: '修改角色员工', icon: 'tenantEmployeeRole-add'},
+        hidden: true
+      },
+      {
+        path: 'tenantRoleModule',
+        name: 'tenantRoleModule',
+        component: () => import('@/views/employee/tenantRoleModule/index'),
+        meta: {title: '角色模块列表', icon: 'tenantRoleModule-list'}
+      },
+      {
+        path: 'addTenantRoleModule',
+        name: 'addTenantRoleModule',
+        component: () => import('@/views/employee/tenantRoleModule/add'),
+        meta: {title: '添加角色模块', icon: 'tenantRoleModule-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantRoleModule',
+        name: 'viewTenantRoleModule',
+        component: () => import('@/views/employee/tenantRoleModule/view'),
+        meta: {title: '查看角色模块', icon: 'tenantRoleModule-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantRoleModule',
+        name: 'updateTenantRoleModule',
+        component: () => import('@/views/employee/tenantRoleModule/update'),
+        meta: {title: '修改角色模块', icon: 'tenantRoleModule-add'},
         hidden: true
       }
     ]

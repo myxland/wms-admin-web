@@ -172,6 +172,10 @@
             </el-button>
             <el-button
               size="mini"
+              @click="handleUpdateTenantModule(scope.$index, scope.row)">模块
+            </el-button>
+            <el-button
+              size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除
             </el-button>
@@ -373,6 +377,9 @@
       },
       handleUpdateTenantWaterType(index, row) {
         this.$router.push({path: '/tenant/tenantWaterType', query: {tenantId: row.id}})
+      },
+      handleUpdateTenantModule(index, row) {
+        this.$router.push({path: '/tenant/updateTenantModule', query: {id:row.id,tenantType:row.tenantType}})
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

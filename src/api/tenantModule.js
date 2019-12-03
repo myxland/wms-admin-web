@@ -15,6 +15,22 @@ export function createTenantModule(data) {
   })
 }
 
+export function createBatchTenantModuleByTenantId(tenantId,data) {
+  return request({
+    url:'/tenantModule/createBatch/tenant/'+tenantId,
+    method:'post',
+    data:data
+  })
+}
+
+export function createBatchTenantModuleByModuleId(moduleId,data) {
+  return request({
+    url:'/tenantModule/createBatch/module/'+moduleId,
+    method:'post',
+    data:data
+  })
+}
+
 export function deleteTenantModule(id) {
   return request({
     url:'/tenantModule/delete/'+id,

@@ -103,7 +103,7 @@
 </template>
 <script>
   import {createTenantModule, getTenantModule, updateTenantModule} from '@/api/tenantModule'
-  import {fetchList as fetchModuleInfoList} from '@/api/moduleInfo';
+  import {fetchList as fetchModuleInfoList, getModuleInfo} from '@/api/moduleInfo';
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
   import {formatDate} from '@/utils/date';
   import SingleUpload from '@/components/Upload/singleUpload'
@@ -202,6 +202,16 @@
       }
       this.getModuleInfoList();
       this.getTenantInfoList();
+
+      if(this.isEdit) {
+        if(this.$route.query.moduleId){
+          if(this.tenantModule.moduleDisplayName==null || this.tenantModule.moduleDisplayName.length ===0){
+            getModuleInfo(this.$route.query.moduleId).then(response => {
+              this.tenantModule.moduleDisplayName = response.data.moduleName;
+            });
+          }
+        }
+      }
     },
     methods: {
       getModuleInfoList() {
