@@ -7,7 +7,7 @@
                ref="loginForm"
                label-position="left">
         <div style="text-align: center">
-          <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
+          <svg-icon icon-class="login-water" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
         </div>
         <h2 class="login-title color-main">登录</h2>
         <el-form-item prop="username">
