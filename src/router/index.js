@@ -438,6 +438,33 @@ export const constantRouterMap = [
         component: () => import('@/views/employee/tenantRoleModule/update'),
         meta: {title: '修改角色模块', icon: 'tenantRoleModule-add'},
         hidden: true
+      },
+      {
+        path: 'tenantRoleMenu',
+        name: 'tenantRoleMenu',
+        component: () => import('@/views/employee/tenantRoleMenu/index'),
+        meta: {title: '角色菜单列表', icon: 'tenantRoleMenu-list'}
+      },
+      {
+        path: 'addTenantRoleMenu',
+        name: 'addTenantRoleMenu',
+        component: () => import('@/views/employee/tenantRoleMenu/add'),
+        meta: {title: '添加角色菜单', icon: 'tenantRoleMenu-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantRoleMenu',
+        name: 'viewTenantRoleMenu',
+        component: () => import('@/views/employee/tenantRoleMenu/view'),
+        meta: {title: '查看角色菜单', icon: 'tenantRoleMenu-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantRoleMenu',
+        name: 'updateTenantRoleMenu',
+        component: () => import('@/views/employee/tenantRoleMenu/update'),
+        meta: {title: '修改角色菜单', icon: 'tenantRoleMenu-add'},
+        hidden: true
       }
     ]
   },
