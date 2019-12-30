@@ -18,20 +18,7 @@ import Layout from '../views/layout/Layout'
     icon: 'svg-name'             the icon show in the sidebar,
   }
  **/
-export const constantRouterMap = [
-  {path: '/login', component: () => import('@/views/login/index'), hidden: true},
-  {path: '/404', component: () => import('@/views/404'), hidden: true},
-  {
-    path: '',
-    component: Layout,
-    redirect: '/home',
-    children: [{
-      path: 'home',
-      name: 'home',
-      component: () => import('@/views/home/index'),
-      meta: {title: '首页', icon: 'home'}
-    }]
-  },
+export const constantRouterMapBak = [
   {
     path: '/tenant',
     component: Layout,
@@ -1694,7 +1681,65 @@ export const constantRouterMap = [
         hidden:true
       }
     ]
+  }
+]
+
+export const constantRouterMap = [
+  {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+  {path: '/404', component: () => import('@/views/404'), hidden: true},
+  {
+    path: '',
+    component: Layout,
+    redirect: '/home',
+    children: [{
+      path: 'home',
+      name: 'home',
+      component: () => import('@/views/home/index'),
+      meta: {title: '首页', icon: 'home'}
+    }]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantInfo',
+    name: 'saas',
+    meta: {title: '租户表', icon: 'tenantInfo'},
+    children: [{
+        path: 'tenantInfo',
+        name: 'tenantInfo',
+        component: () => import('@/views/saas/tenantInfo/index'),
+        meta: {title: '租户表列表', icon: 'tenantInfo-list'}
+      },
+      {
+        path: 'addTenantInfo',
+        name: 'addTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/add'),
+        meta: {title: '添加租户表', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantInfo',
+        name: 'viewTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/view'),
+        meta: {title: '查看租户表', icon: 'tenantInfo-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantInfo',
+        name: 'updateTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/update'),
+        meta: {title: '修改租户表', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'addTenantConsumptionBillByTenantConsume',
+        name: 'addTenantConsumptionBillByTenantConsume',
+        component: () => import('@/views/saas/tenantConsumptionBill/addByTenantConsume'),
+        meta: {title: '添加租户账单', icon: 'tenantConsumptionBill-add'},
+        hidden: true
+      }
+    ]
+  },  
   {path: '*', redirect: '/404', hidden: true}
 ]
 
