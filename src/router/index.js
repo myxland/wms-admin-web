@@ -31,41 +31,6 @@ export const constantRouterMap = [
       component: () => import('@/views/home/index'),
       meta: {title: '首页', icon: 'home'}
     }]
-  },
-  {
-    path: '/saas',
-    component: Layout,
-    redirect: '/saas/moduleInfo',
-    name: 'saas',
-    meta: {title: '模块信息', icon: 'moduleInfo'},
-    children: [{
-      path: 'moduleInfo',
-      name: 'moduleInfo',
-      component: () => import('@/views/saas/moduleInfo/index'),
-      meta: {title: '模块信息列表', icon: 'moduleInfo-list'}
-    },
-      {
-        path: 'addModuleInfo',
-        name: 'addModuleInfo',
-        component: () => import('@/views/saas/moduleInfo/add'),
-        meta: {title: '添加模块信息', icon: 'moduleInfo-add'},
-        hidden: true
-      },
-      {
-        path: 'viewModuleInfo',
-        name: 'viewModuleInfo',
-        component: () => import('@/views/saas/moduleInfo/view'),
-        meta: {title: '查看模块信息', icon: 'moduleInfo-view'},
-        hidden: true
-      },
-      {
-        path: 'updateModuleInfo',
-        name: 'updateModuleInfo',
-        component: () => import('@/views/saas/moduleInfo/update'),
-        meta: {title: '修改模块信息', icon: 'moduleInfo-add'},
-        hidden: true
-      }
-    ]
   },  
   {path: '*', redirect: '/404', hidden: true}
 ]
