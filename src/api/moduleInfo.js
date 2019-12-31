@@ -37,33 +37,33 @@ export function updateModuleInfo(id,data) {
   })
 }
 
-export function updateBasicOn(data) {
+export function updateBasicEditionOn(data) {
   return request({
-    url:'/moduleInfo/update/basicOn',
+    url:'/moduleInfo/update/basicEditionOn',
     method:'post',
     data:data
   })
 }
 
-export function updateAdvanceOn(data) {
+export function updateAdvanceEditionOn(data) {
   return request({
-    url:'/moduleInfo/update/advanceOn',
+    url:'/moduleInfo/update/advanceEditionOn',
     method:'post',
     data:data
   })
 }
 
-export function updateUltimateOn(data) {
+export function updateUltimateEditionOn(data) {
   return request({
-    url:'/moduleInfo/update/ultimateOn',
+    url:'/moduleInfo/update/ultimateEditionOn',
     method:'post',
     data:data
   })
 }
 
-export function updateModuleReleaseOn(data) {
+export function updateModuleOn(data) {
   return request({
-    url:'/moduleInfo/update/moduleReleaseOn',
+    url:'/moduleInfo/update/moduleOn',
     method:'post',
     data:data
   })
