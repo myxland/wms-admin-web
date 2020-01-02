@@ -35,6 +35,48 @@ export const constantRouterMap = [
   {
     path: '/saas',
     component: Layout,
+    redirect: '/saas/tenantInfo',
+    name: 'saas',
+    meta: {title: '租户表', icon: 'tenantInfo'},
+    children: [{
+        path: 'tenantInfo',
+        name: 'tenantInfo',
+        component: () => import('@/views/saas/tenantInfo/index'),
+        meta: {title: '租户表列表', icon: 'tenantInfo-list'}
+      },
+      {
+        path: 'addTenantInfo',
+        name: 'addTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/add'),
+        meta: {title: '添加租户表', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantInfo',
+        name: 'viewTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/view'),
+        meta: {title: '查看租户表', icon: 'tenantInfo-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantInfo',
+        name: 'updateTenantInfo',
+        component: () => import('@/views/saas/tenantInfo/update'),
+        meta: {title: '修改租户表', icon: 'tenantInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'addTenantConsumptionBillByTenantConsume',
+        name: 'addTenantConsumptionBillByTenantConsume',
+        component: () => import('@/views/saas/tenantConsumptionBill/addByTenantConsume'),
+        meta: {title: '添加租户账单', icon: 'tenantConsumptionBill-add'},
+        hidden: true
+      }
+    ]
+  }, 
+  {
+    path: '/saas',
+    component: Layout,
     redirect: '/saas/moduleInfo',
     name: 'saas',
     meta: {title: '模块信息', icon: 'moduleInfo'},
@@ -52,6 +94,13 @@ export const constantRouterMap = [
         hidden: true
       },
       {
+        path: 'addModuleInfoWithModulePrice',
+        name: 'addModuleInfoWithModulePrice',
+        component: () => import('@/views/saas/moduleInfo/addWithModulePrice'),
+        meta: {title: '添加模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      },
+      {
         path: 'viewModuleInfo',
         name: 'viewModuleInfo',
         component: () => import('@/views/saas/moduleInfo/view'),
@@ -63,6 +112,33 @@ export const constantRouterMap = [
         name: 'updateModuleInfo',
         component: () => import('@/views/saas/moduleInfo/update'),
         meta: {title: '修改模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      },
+      {
+        path: 'modulePrice',
+        name: 'modulePrice',
+        component: () => import('@/views/saas/modulePrice/index'),
+        meta: {title: '模块价格列表', icon: 'modulePrice-list'}
+      },
+      {
+        path: 'addModulePrice',
+        name: 'addModulePrice',
+        component: () => import('@/views/saas/modulePrice/add'),
+        meta: {title: '添加模块价格', icon: 'modulePrice-add'},
+        hidden: true
+      },      
+      {
+        path: 'viewModulePrice',
+        name: 'viewModulePrice',
+        component: () => import('@/views/saas/modulePrice/view'),
+        meta: {title: '查看模块价格', icon: 'modulePrice-view'},
+        hidden: true
+      },
+      {
+        path: 'updateModulePrice',
+        name: 'updateModulePrice',
+        component: () => import('@/views/saas/modulePrice/update'),
+        meta: {title: '修改模块价格', icon: 'modulePrice-add'},
         hidden: true
       }
     ]

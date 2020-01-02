@@ -547,7 +547,8 @@
         }
       },
       addModuleInfo() {
-        this.$router.push({path: '/saas/addModuleInfo', query: {moduleId:this.moduleId}})
+        //this.$router.push({path: '/saas/addModuleInfo', query: {moduleId:this.moduleId}})
+        this.$router.push({path: '/saas/addModuleInfoWithModulePrice', query: {}})
       }
     }
   }
