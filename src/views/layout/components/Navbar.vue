@@ -5,10 +5,10 @@
     <span class="tenant-container">
       <el-select placeholder="请选择租户" v-model="tenantId" size="small" @change="handleTenantChange">
                 <el-option
-                  v-for="item in moduleInfoOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
+                  v-for="item in tenantInfoList"
+                  :key="item.id"
+                  :label="item.tenantName"
+                  :value="item.id">
                 </el-option>
       </el-select>
     </span>
@@ -39,8 +39,7 @@ import Hamburger from '@/components/Hamburger'
 export default {
   data(){
     return {
-      tenantId:"1",
-      moduleInfoOptions:[{label:"xx",value:"1"},{label:"yy",value:"2"}]
+      tenantId:null
     }
   },
   components: {
@@ -50,7 +49,8 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'tenantInfoList'
     ])
   },
   methods: {
