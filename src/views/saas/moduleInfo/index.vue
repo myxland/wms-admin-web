@@ -418,7 +418,7 @@
         this.$router.push({path: '/saas/viewModuleInfo', query: {id: row.id, moduleId:this.moduleId}})
       },
       handleUpdate(index, row) {
-        this.$router.push({path: '/saas/updateModuleInfo', query: {id: row.id}})
+        this.$router.push({path: '/saas/updateModuleInfoWithModulePrice', query: {id: row.id}})
       },
       handleDelete(index, row) {
         this.$confirm('是否要删除该模块信息', '提示', {

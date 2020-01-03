@@ -334,7 +334,14 @@
       if (this.isEdit) {
       	if (this.$route.query.id) {
           	getModuleInfo(this.$route.query.id).then(response => {
-	          this.moduleInfo = response.data;
+            this.moduleInfo = response.data;
+            if(this.moduleInfo.basicEditionOn ==1){
+              this.moduleInfo.moduleDefaultModulePrice = "basic";
+            } else if(this.moduleInfo.advanceEditionOn ==1){
+              this.moduleInfo.moduleDefaultModulePrice = "advance";
+            } else if(this.moduleInfo.ultimateEditionOn ==1){
+              this.moduleInfo.moduleDefaultModulePrice = "ultimate";
+            }
         	});
         }
         else if (this.$route.query.tenantId) {

@@ -115,10 +115,18 @@ export const constantRouterMap = [
         hidden: true
       },
       {
+        path: 'updateModuleInfoWithModulePrice',
+        name: 'updateModuleInfoWithModulePrice',
+        component: () => import('@/views/saas/moduleInfo/updateWithModulePrice'),
+        meta: {title: '修改模块信息', icon: 'moduleInfo-add'},
+        hidden: true
+      },
+      {
         path: 'modulePrice',
         name: 'modulePrice',
         component: () => import('@/views/saas/modulePrice/index'),
-        meta: {title: '模块价格列表', icon: 'modulePrice-list'}
+        meta: {title: '模块价格列表', icon: 'modulePrice-list'},
+        hidden: true
       },
       {
         path: 'addModulePrice',
