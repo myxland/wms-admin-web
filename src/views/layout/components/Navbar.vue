@@ -2,8 +2,18 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
+    <span class="tenant-container">
+      <el-select placeholder="请选择租户" v-model="tenantId" size="small" @change="handleTenantChange">
+                <el-option
+                  v-for="item in moduleInfoOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+      </el-select>
+    </span>
     <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
+      <div class="avatar-wrapper">        
         <img class="user-avatar" :src="avatar">
         <i class="el-icon-caret-bottom"></i>
       </div>
@@ -27,6 +37,12 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
+  data(){
+    return {
+      tenantId:"1",
+      moduleInfoOptions:[{label:"xx",value:"1"},{label:"yy",value:"2"}]
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger
@@ -45,6 +61,9 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
+    },
+    handleTenantChange(val){
+      this.$router.push({query: {tenantId:val}})
     }
   }
 }
@@ -66,6 +85,12 @@ export default {
     right: 90px;
     top: 16px;
     color: red;
+  }
+  .tenant-container {
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    right: 140px;
   }
   .avatar-container {
     height: 50px;
