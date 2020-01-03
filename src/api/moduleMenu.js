@@ -37,25 +37,25 @@ export function updateModuleMenu(id,data) {
   })
 }
 
-export function updateBasicOn(data) {
+export function updateBasicEditionOn(data) {
   return request({
-    url:'/moduleMenu/update/basicOn',
+    url:'/moduleMenu/update/basicEditionOn',
     method:'post',
     data:data
   })
 }
 
-export function updateAdvanceOn(data) {
+export function updateAdvanceEditionOn(data) {
   return request({
-    url:'/moduleMenu/update/advanceOn',
+    url:'/moduleMenu/update/advanceEditionOn',
     method:'post',
     data:data
   })
 }
 
-export function updateUltimateOn(data) {
+export function updateUltimateEditionOn(data) {
   return request({
-    url:'/moduleMenu/update/ultimateOn',
+    url:'/moduleMenu/update/ultimateEditionOn',
     method:'post',
     data:data
   })

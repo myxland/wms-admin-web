@@ -151,6 +151,41 @@ export const constantRouterMap = [
       }
     ]
   }, 
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/moduleMenu',
+    name: 'saas',
+    meta: {title: '模块菜单', icon: 'moduleMenu'},
+    children: [{
+      path: 'moduleMenu',
+      name: 'moduleMenu',
+      component: () => import('@/views/saas/moduleMenu/indexTree'),
+      meta: {title: '模块菜单列表', icon: 'moduleMenu-list'}
+    },
+      {
+        path: 'addModuleMenu',
+        name: 'addModuleMenu',
+        component: () => import('@/views/saas/moduleMenu/add'),
+        meta: {title: '添加模块菜单', icon: 'moduleMenu-add'},
+        hidden: true
+      },
+      {
+        path: 'viewModuleMenu',
+        name: 'viewModuleMenu',
+        component: () => import('@/views/saas/moduleMenu/view'),
+        meta: {title: '查看模块菜单', icon: 'moduleMenu-view'},
+        hidden: true
+      },
+      {
+        path: 'updateModuleMenu',
+        name: 'updateModuleMenu',
+        component: () => import('@/views/saas/moduleMenu/update'),
+        meta: {title: '修改模块菜单', icon: 'moduleMenu-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
