@@ -154,6 +154,41 @@ export const constantRouterMap = [
   {
     path: '/saas',
     component: Layout,
+    redirect: '/saas/tenantRole',
+    name: 'saas',
+    meta: {title: '角色信息', icon: 'tenantRole'},
+    children: [{
+      path: 'tenantRole',
+      name: 'tenantRole',
+      component: () => import('@/views/saas/tenantRole/index'),
+      meta: {title: '角色信息列表', icon: 'tenantRole-list'}
+    },
+      {
+        path: 'addTenantRole',
+        name: 'addTenantRole',
+        component: () => import('@/views/saas/tenantRole/add'),
+        meta: {title: '添加角色信息', icon: 'tenantRole-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantRole',
+        name: 'viewTenantRole',
+        component: () => import('@/views/saas/tenantRole/view'),
+        meta: {title: '查看角色信息', icon: 'tenantRole-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantRole',
+        name: 'updateTenantRole',
+        component: () => import('@/views/saas/tenantRole/update'),
+        meta: {title: '修改角色信息', icon: 'tenantRole-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
     redirect: '/saas/moduleMenu',
     name: 'saas',
     meta: {title: '模块菜单', icon: 'moduleMenu'},
