@@ -221,6 +221,41 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantDepartment',
+    name: 'saas',
+    meta: {title: '租户部门', icon: 'tenantDepartment'},
+    children: [{
+      path: 'tenantDepartment',
+      name: 'tenantDepartment',
+      component: () => import('@/views/saas/tenantDepartment/index'),
+      meta: {title: '租户部门列表', icon: 'tenantDepartment-list'}
+    },
+      {
+        path: 'addTenantDepartment',
+        name: 'addTenantDepartment',
+        component: () => import('@/views/saas/tenantDepartment/add'),
+        meta: {title: '添加租户部门', icon: 'tenantDepartment-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantDepartment',
+        name: 'viewTenantDepartment',
+        component: () => import('@/views/saas/tenantDepartment/view'),
+        meta: {title: '查看租户部门', icon: 'tenantDepartment-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantDepartment',
+        name: 'updateTenantDepartment',
+        component: () => import('@/views/saas/tenantDepartment/update'),
+        meta: {title: '修改租户部门', icon: 'tenantDepartment-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
