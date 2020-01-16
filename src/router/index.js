@@ -256,6 +256,41 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantEmployee',
+    name: 'saas',
+    meta: {title: '租户员工', icon: 'tenantEmployee'},
+    children: [{
+      path: 'tenantEmployee',
+      name: 'tenantEmployee',
+      component: () => import('@/views/saas/tenantEmployee/index'),
+      meta: {title: '租户员工列表', icon: 'tenantEmployee-list'}
+    },
+      {
+        path: 'addTenantEmployee',
+        name: 'addTenantEmployee',
+        component: () => import('@/views/saas/tenantEmployee/add'),
+        meta: {title: '添加租户员工', icon: 'tenantEmployee-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantEmployee',
+        name: 'viewTenantEmployee',
+        component: () => import('@/views/saas/tenantEmployee/view'),
+        meta: {title: '查看租户员工', icon: 'tenantEmployee-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantEmployee',
+        name: 'updateTenantEmployee',
+        component: () => import('@/views/saas/tenantEmployee/update'),
+        meta: {title: '修改租户员工', icon: 'tenantEmployee-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
