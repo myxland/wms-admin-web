@@ -641,6 +641,41 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantMeterReadLogCurrent',
+    name: 'saas',
+    meta: {title: '当期抄表计划', icon: 'tenantMeterReadLogCurrent'},
+    children: [{
+      path: 'tenantMeterReadLogCurrent',
+      name: 'tenantMeterReadLogCurrent',
+      component: () => import('@/views/saas/tenantMeterReadLogCurrent/index'),
+      meta: {title: '当期抄表计划列表', icon: 'tenantMeterReadLogCurrent-list'}
+    },
+      {
+        path: 'addTenantMeterReadLogCurrent',
+        name: 'addTenantMeterReadLogCurrent',
+        component: () => import('@/views/saas/tenantMeterReadLogCurrent/add'),
+        meta: {title: '添加当期抄表计划', icon: 'tenantMeterReadLogCurrent-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantMeterReadLogCurrent',
+        name: 'viewTenantMeterReadLogCurrent',
+        component: () => import('@/views/saas/tenantMeterReadLogCurrent/view'),
+        meta: {title: '查看当期抄表计划', icon: 'tenantMeterReadLogCurrent-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantMeterReadLogCurrent',
+        name: 'updateTenantMeterReadLogCurrent',
+        component: () => import('@/views/saas/tenantMeterReadLogCurrent/update'),
+        meta: {title: '修改当期抄表计划', icon: 'tenantMeterReadLogCurrent-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
