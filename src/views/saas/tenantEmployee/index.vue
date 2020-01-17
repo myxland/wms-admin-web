@@ -22,71 +22,10 @@
           <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
             <el-form-item label="员工ID：">
               <el-input style="width: 203px" v-model="listQuery.id" placeholder="员工ID"></el-input>
-            </el-form-item>
-            <el-form-item label="租户ID：">
-              <el-select v-model="listQuery.tenantId" placeholder="请选择租户ID" :disabled="this.$route.query.tenantId?true:false" clearable>
-                <el-option
-                  v-for="item in tenantInfoOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
+            </el-form-item>            
             <el-form-item label="员工名称：">
               <el-input style="width: 203px" v-model="listQuery.employeeName" placeholder="员工名称"></el-input>
-            </el-form-item>
-            <el-form-item label="登录密码：">
-              <el-input style="width: 203px" v-model="listQuery.employeePassword" placeholder="登录密码"></el-input>
-            </el-form-item>
-            <el-form-item label="员工所属部门ID：">
-              <el-input style="width: 203px" v-model="listQuery.employeeDepartmentId" placeholder="员工所属部门ID"></el-input>
-            </el-form-item>
-            <el-form-item label="可登录系统：">
-              <el-select v-model="listQuery.employeeLoginOn" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in employeeLoginOnOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="员工状态：">
-              <el-select v-model="listQuery.employeeStatus" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in employeeStatusOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="员工手机号：">
-              <el-input style="width: 203px" v-model="listQuery.employeeMobile" placeholder="员工手机号"></el-input>
-            </el-form-item>
-            <el-form-item label="员工邮箱：">
-              <el-input style="width: 203px" v-model="listQuery.employeeEmail" placeholder="员工邮箱"></el-input>
-            </el-form-item>
-            <el-form-item label="员工个人微信号：">
-              <el-input style="width: 203px" v-model="listQuery.employeePersonalWx" placeholder="员工个人微信号"></el-input>
-            </el-form-item>
-            <el-form-item label="员工企业微信号：">
-              <el-input style="width: 203px" v-model="listQuery.employeeEnterpriceWx" placeholder="员工企业微信号"></el-input>
-            </el-form-item>
-            <el-form-item label="钉钉号：">
-              <el-input style="width: 203px" v-model="listQuery.employeeDingding" placeholder="钉钉号"></el-input>
-            </el-form-item>
-            <el-form-item label="操作员创建类型：">
-              <el-select v-model="listQuery.employeeCreateType" placeholder="全部" clearable>
-                <el-option
-                  v-for="item in employeeCreateTypeOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
+            </el-form-item>            
           </el-form>
         </div>
     </el-card>
@@ -108,20 +47,11 @@
                 v-loading="listLoading"
                 border
       >
-        <el-table-column label="员工ID" width="180" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column label="员工所属部门" width="200" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.employeeDepartmentName}}</template>
         </el-table-column>
-        <el-table-column label="租户ID" width="280" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.tenantName}}</template>
-        </el-table-column>
-        <el-table-column label="员工名称" width="100" align="left" header-align="center">
+        <el-table-column label="员工名称" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.employeeName}}</template>
-        </el-table-column>
-        <el-table-column label="登录密码" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeePassword}}</template>
-        </el-table-column>
-        <el-table-column label="员工所属部门ID" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeeDepartmentId}}</template>
         </el-table-column>
         <el-table-column label="可登录系统" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.employeeLoginOn | formatEmployeeLoginOn}}</template>
@@ -129,30 +59,14 @@
         <el-table-column label="员工状态" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.employeeStatus | formatEmployeeStatus}}</template>
         </el-table-column>
-        <el-table-column label="员工手机号" width="120" align="left" header-align="center">
+        <el-table-column label="员工手机号" width="180" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.employeeMobile}}</template>
         </el-table-column>
-        <el-table-column label="员工邮箱" width="100" align="left" header-align="center">
+        <el-table-column label="员工邮箱" width="180" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.employeeEmail}}</template>
         </el-table-column>
-        <el-table-column label="员工个人微信号" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeePersonalWx}}</template>
-        </el-table-column>
-        <el-table-column label="员工企业微信号" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeeEnterpriceWx}}</template>
-        </el-table-column>
-        <el-table-column label="钉钉号" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeeDingding}}</template>
-        </el-table-column>
-        <el-table-column label="操作员创建类型" width="100" align="left" header-align="center">
-          <template slot-scope="scope">{{scope.row.employeeCreateType | formatEmployeeCreateType}}</template>
-        </el-table-column>
         <el-table-column label="操作" width="220" align="center">
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleView(scope.$index, scope.row)">查看
-            </el-button>
+          <template slot-scope="scope">            
             <el-button
               size="mini"
               @click="handleUpdate(scope.$index, scope.row)">编辑
