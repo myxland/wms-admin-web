@@ -536,6 +536,111 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomerType',
+    name: 'saas',
+    meta: {title: '用户分类', icon: 'tenantCustomerType'},
+    children: [{
+      path: 'tenantCustomerType',
+      name: 'tenantCustomerType',
+      component: () => import('@/views/saas/tenantCustomerType/index'),
+      meta: {title: '用户分类列表', icon: 'tenantCustomerType-list'}
+    },
+      {
+        path: 'addTenantCustomerType',
+        name: 'addTenantCustomerType',
+        component: () => import('@/views/saas/tenantCustomerType/add'),
+        meta: {title: '添加用户分类', icon: 'tenantCustomerType-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomerType',
+        name: 'viewTenantCustomerType',
+        component: () => import('@/views/saas/tenantCustomerType/view'),
+        meta: {title: '查看用户分类', icon: 'tenantCustomerType-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomerType',
+        name: 'updateTenantCustomerType',
+        component: () => import('@/views/saas/tenantCustomerType/update'),
+        meta: {title: '修改用户分类', icon: 'tenantCustomerType-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomerMeterInstall',
+    name: 'saas',
+    meta: {title: '用户水表立户', icon: 'tenantCustomerMeterInstall'},
+    children: [{
+      path: 'tenantCustomerMeterInstall',
+      name: 'tenantCustomerMeterInstall',
+      component: () => import('@/views/saas/tenantCustomerMeterInstall/index'),
+      meta: {title: '用户水表立户列表', icon: 'tenantCustomerMeterInstall-list'}
+    },
+      {
+        path: 'addTenantCustomerMeterInstall',
+        name: 'addTenantCustomerMeterInstall',
+        component: () => import('@/views/saas/tenantCustomerMeterInstall/add'),
+        meta: {title: '添加用户水表立户', icon: 'tenantCustomerMeterInstall-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomerMeterInstall',
+        name: 'viewTenantCustomerMeterInstall',
+        component: () => import('@/views/saas/tenantCustomerMeterInstall/view'),
+        meta: {title: '查看用户水表立户', icon: 'tenantCustomerMeterInstall-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomerMeterInstall',
+        name: 'updateTenantCustomerMeterInstall',
+        component: () => import('@/views/saas/tenantCustomerMeterInstall/update'),
+        meta: {title: '修改用户水表立户', icon: 'tenantCustomerMeterInstall-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantBooklet',
+    name: 'saas',
+    meta: {title: '租户表册', icon: 'tenantBooklet'},
+    children: [{
+      path: 'tenantBooklet',
+      name: 'tenantBooklet',
+      component: () => import('@/views/saas/tenantBooklet/index'),
+      meta: {title: '租户表册列表', icon: 'tenantBooklet-list'}
+    },
+      {
+        path: 'addTenantBooklet',
+        name: 'addTenantBooklet',
+        component: () => import('@/views/saas/tenantBooklet/add'),
+        meta: {title: '添加租户表册', icon: 'tenantBooklet-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantBooklet',
+        name: 'viewTenantBooklet',
+        component: () => import('@/views/saas/tenantBooklet/view'),
+        meta: {title: '查看租户表册', icon: 'tenantBooklet-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantBooklet',
+        name: 'updateTenantBooklet',
+        component: () => import('@/views/saas/tenantBooklet/update'),
+        meta: {title: '修改租户表册', icon: 'tenantBooklet-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
