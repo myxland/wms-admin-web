@@ -291,6 +291,251 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantWaterArea',
+    name: 'saas',
+    meta: {title: '供水区域', icon: 'tenantWaterArea'},
+    children: [{
+      path: 'tenantWaterArea',
+      name: 'tenantWaterArea',
+      component: () => import('@/views/saas/tenantWaterArea/index'),
+      meta: {title: '供水区域列表', icon: 'tenantWaterArea-list'}
+    },
+      {
+        path: 'addTenantWaterArea',
+        name: 'addTenantWaterArea',
+        component: () => import('@/views/saas/tenantWaterArea/add'),
+        meta: {title: '添加供水区域', icon: 'tenantWaterArea-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantWaterArea',
+        name: 'viewTenantWaterArea',
+        component: () => import('@/views/saas/tenantWaterArea/view'),
+        meta: {title: '查看供水区域', icon: 'tenantWaterArea-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantWaterArea',
+        name: 'updateTenantWaterArea',
+        component: () => import('@/views/saas/tenantWaterArea/update'),
+        meta: {title: '修改供水区域', icon: 'tenantWaterArea-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantPriceItem',
+    name: 'saas',
+    meta: {title: '费用项目', icon: 'tenantPriceItem'},
+    children: [{
+      path: 'tenantPriceItem',
+      name: 'tenantPriceItem',
+      component: () => import('@/views/saas/tenantPriceItem/index'),
+      meta: {title: '费用项目列表', icon: 'tenantPriceItem-list'}
+    },
+      {
+        path: 'addTenantPriceItem',
+        name: 'addTenantPriceItem',
+        component: () => import('@/views/saas/tenantPriceItem/add'),
+        meta: {title: '添加费用项目', icon: 'tenantPriceItem-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantPriceItem',
+        name: 'viewTenantPriceItem',
+        component: () => import('@/views/saas/tenantPriceItem/view'),
+        meta: {title: '查看费用项目', icon: 'tenantPriceItem-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantPriceItem',
+        name: 'updateTenantPriceItem',
+        component: () => import('@/views/saas/tenantPriceItem/update'),
+        meta: {title: '修改费用项目', icon: 'tenantPriceItem-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantPriceType',
+    name: 'saas',
+    meta: {title: '水价分类', icon: 'tenantPriceType'},
+    children: [{
+      path: 'tenantPriceType',
+      name: 'tenantPriceType',
+      component: () => import('@/views/saas/tenantPriceType/index'),
+      meta: {title: '水价分类列表', icon: 'tenantPriceType-list'}
+    },
+      {
+        path: 'addTenantPriceType',
+        name: 'addTenantPriceType',
+        component: () => import('@/views/saas/tenantPriceType/add'),
+        meta: {title: '添加水价分类', icon: 'tenantPriceType-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantPriceType',
+        name: 'viewTenantPriceType',
+        component: () => import('@/views/saas/tenantPriceType/view'),
+        meta: {title: '查看水价分类', icon: 'tenantPriceType-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantPriceType',
+        name: 'updateTenantPriceType',
+        component: () => import('@/views/saas/tenantPriceType/update'),
+        meta: {title: '修改水价分类', icon: 'tenantPriceType-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantWaterType',
+    name: 'saas',
+    meta: {title: '用水分类', icon: 'tenantWaterType'},
+    children: [{
+      path: 'tenantWaterType',
+      name: 'tenantWaterType',
+      component: () => import('@/views/saas/tenantWaterType/index'),
+      meta: {title: '用水分类列表', icon: 'tenantWaterType-list'}
+    },
+      {
+        path: 'addTenantWaterType',
+        name: 'addTenantWaterType',
+        component: () => import('@/views/saas/tenantWaterType/add'),
+        meta: {title: '添加用水分类', icon: 'tenantWaterType-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantWaterType',
+        name: 'viewTenantWaterType',
+        component: () => import('@/views/saas/tenantWaterType/view'),
+        meta: {title: '查看用水分类', icon: 'tenantWaterType-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantWaterType',
+        name: 'updateTenantWaterType',
+        component: () => import('@/views/saas/tenantWaterType/update'),
+        meta: {title: '修改用水分类', icon: 'tenantWaterType-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantManufactor',
+    name: 'saas',
+    meta: {title: '水表厂商', icon: 'tenantManufactor'},
+    children: [{
+      path: 'tenantManufactor',
+      name: 'tenantManufactor',
+      component: () => import('@/views/saas/tenantManufactor/index'),
+      meta: {title: '水表厂商列表', icon: 'tenantManufactor-list'}
+    },
+      {
+        path: 'addTenantManufactor',
+        name: 'addTenantManufactor',
+        component: () => import('@/views/saas/tenantManufactor/add'),
+        meta: {title: '添加水表厂商', icon: 'tenantManufactor-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantManufactor',
+        name: 'viewTenantManufactor',
+        component: () => import('@/views/saas/tenantManufactor/view'),
+        meta: {title: '查看水表厂商', icon: 'tenantManufactor-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantManufactor',
+        name: 'updateTenantManufactor',
+        component: () => import('@/views/saas/tenantManufactor/update'),
+        meta: {title: '修改水表厂商', icon: 'tenantManufactor-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCaliber',
+    name: 'saas',
+    meta: {title: '水表口径', icon: 'tenantCaliber'},
+    children: [{
+      path: 'tenantCaliber',
+      name: 'tenantCaliber',
+      component: () => import('@/views/saas/tenantCaliber/index'),
+      meta: {title: '水表口径列表', icon: 'tenantCaliber-list'}
+    },
+      {
+        path: 'addTenantCaliber',
+        name: 'addTenantCaliber',
+        component: () => import('@/views/saas/tenantCaliber/add'),
+        meta: {title: '添加水表口径', icon: 'tenantCaliber-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCaliber',
+        name: 'viewTenantCaliber',
+        component: () => import('@/views/saas/tenantCaliber/view'),
+        meta: {title: '查看水表口径', icon: 'tenantCaliber-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCaliber',
+        name: 'updateTenantCaliber',
+        component: () => import('@/views/saas/tenantCaliber/update'),
+        meta: {title: '修改水表口径', icon: 'tenantCaliber-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantMeterStatus',
+    name: 'saas',
+    meta: {title: '水表状况', icon: 'tenantMeterStatus'},
+    children: [{
+      path: 'tenantMeterStatus',
+      name: 'tenantMeterStatus',
+      component: () => import('@/views/saas/tenantMeterStatus/index'),
+      meta: {title: '水表状况列表', icon: 'tenantMeterStatus-list'}
+    },
+      {
+        path: 'addTenantMeterStatus',
+        name: 'addTenantMeterStatus',
+        component: () => import('@/views/saas/tenantMeterStatus/add'),
+        meta: {title: '添加水表状况', icon: 'tenantMeterStatus-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantMeterStatus',
+        name: 'viewTenantMeterStatus',
+        component: () => import('@/views/saas/tenantMeterStatus/view'),
+        meta: {title: '查看水表状况', icon: 'tenantMeterStatus-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantMeterStatus',
+        name: 'updateTenantMeterStatus',
+        component: () => import('@/views/saas/tenantMeterStatus/update'),
+        meta: {title: '修改水表状况', icon: 'tenantMeterStatus-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
