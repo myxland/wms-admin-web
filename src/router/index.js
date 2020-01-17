@@ -676,6 +676,76 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomerMeterChangeLog',
+    name: 'saas',
+    meta: {title: '信息变更', icon: 'tenantCustomerMeterChangeLog'},
+    children: [{
+      path: 'tenantCustomerMeterChangeLog',
+      name: 'tenantCustomerMeterChangeLog',
+      component: () => import('@/views/saas/tenantCustomerMeterChangeLog/index'),
+      meta: {title: '信息变更列表', icon: 'tenantCustomerMeterChangeLog-list'}
+    },
+      {
+        path: 'addTenantCustomerMeterChangeLog',
+        name: 'addTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/add'),
+        meta: {title: '添加信息变更', icon: 'tenantCustomerMeterChangeLog-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomerMeterChangeLog',
+        name: 'viewTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/view'),
+        meta: {title: '查看信息变更', icon: 'tenantCustomerMeterChangeLog-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomerMeterChangeLog',
+        name: 'updateTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/update'),
+        meta: {title: '修改信息变更', icon: 'tenantCustomerMeterChangeLog-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantConfigSms',
+    name: 'saas',
+    meta: {title: '短信参数设置', icon: 'tenantConfigSms'},
+    children: [{
+      path: 'tenantConfigSms',
+      name: 'tenantConfigSms',
+      component: () => import('@/views/saas/tenantConfigSms/index'),
+      meta: {title: '短信参数设置列表', icon: 'tenantConfigSms-list'}
+    },
+      {
+        path: 'addTenantConfigSms',
+        name: 'addTenantConfigSms',
+        component: () => import('@/views/saas/tenantConfigSms/add'),
+        meta: {title: '添加短信参数设置', icon: 'tenantConfigSms-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantConfigSms',
+        name: 'viewTenantConfigSms',
+        component: () => import('@/views/saas/tenantConfigSms/view'),
+        meta: {title: '查看短信参数设置', icon: 'tenantConfigSms-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantConfigSms',
+        name: 'updateTenantConfigSms',
+        component: () => import('@/views/saas/tenantConfigSms/update'),
+        meta: {title: '修改短信参数设置', icon: 'tenantConfigSms-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
