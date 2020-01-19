@@ -432,9 +432,6 @@
         rules: {
           tenantId: [
             {required: true, message: '请输入租户ID', trigger: 'blur'}
-          ],
-          customerId: [
-            {required: true, message: '请输入用户ID', trigger: 'blur'}
           ]
         }
       }

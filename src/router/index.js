@@ -852,6 +852,78 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantMeter',
+    hidden: true,
+    name: 'saas',
+    meta: {title: '水表信息', icon: 'tenantMeter'},
+    children: [{
+      path: 'tenantMeter',
+      name: 'tenantMeter',
+      component: () => import('@/views/saas/tenantMeter/index'),
+      meta: {title: '水表信息列表', icon: 'tenantMeter-list'}
+    },
+      {
+        path: 'addTenantMeter',
+        name: 'addTenantMeter',
+        component: () => import('@/views/saas/tenantMeter/add'),
+        meta: {title: '添加水表信息', icon: 'tenantMeter-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantMeter',
+        name: 'viewTenantMeter',
+        component: () => import('@/views/saas/tenantMeter/view'),
+        meta: {title: '查看水表信息', icon: 'tenantMeter-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantMeter',
+        name: 'updateTenantMeter',
+        component: () => import('@/views/saas/tenantMeter/update'),
+        meta: {title: '修改水表信息', icon: 'tenantMeter-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomerMeterChangeLog',
+    hidden: true,
+    name: 'saas',
+    meta: {title: '信息变更', icon: 'tenantCustomerMeterChangeLog'},
+    children: [{
+      path: 'tenantCustomerMeterChangeLog',
+      name: 'tenantCustomerMeterChangeLog',
+      component: () => import('@/views/saas/tenantCustomerMeterChangeLog/index'),
+      meta: {title: '信息变更列表', icon: 'tenantCustomerMeterChangeLog-list'}
+    },
+      {
+        path: 'addTenantCustomerMeterChangeLog',
+        name: 'addTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/add'),
+        meta: {title: '添加信息变更', icon: 'tenantCustomerMeterChangeLog-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomerMeterChangeLog',
+        name: 'viewTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/view'),
+        meta: {title: '查看信息变更', icon: 'tenantCustomerMeterChangeLog-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomerMeterChangeLog',
+        name: 'updateTenantCustomerMeterChangeLog',
+        component: () => import('@/views/saas/tenantCustomerMeterChangeLog/update'),
+        meta: {title: '修改信息变更', icon: 'tenantCustomerMeterChangeLog-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
