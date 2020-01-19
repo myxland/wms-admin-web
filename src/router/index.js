@@ -746,6 +746,112 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomerLinkman',
+    name: 'saas',
+    meta: {title: '用户联系人', icon: 'tenantCustomerLinkman'},
+    children: [{
+      path: 'tenantCustomerLinkman',
+      name: 'tenantCustomerLinkman',
+      component: () => import('@/views/saas/tenantCustomerLinkman/index'),
+      meta: {title: '用户联系人列表', icon: 'tenantCustomerLinkman-list'}
+    },
+      {
+        path: 'addTenantCustomerLinkman',
+        name: 'addTenantCustomerLinkman',
+        component: () => import('@/views/saas/tenantCustomerLinkman/add'),
+        meta: {title: '添加用户联系人', icon: 'tenantCustomerLinkman-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomerLinkman',
+        name: 'viewTenantCustomerLinkman',
+        component: () => import('@/views/saas/tenantCustomerLinkman/view'),
+        meta: {title: '查看用户联系人', icon: 'tenantCustomerLinkman-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomerLinkman',
+        name: 'updateTenantCustomerLinkman',
+        component: () => import('@/views/saas/tenantCustomerLinkman/update'),
+        meta: {title: '修改用户联系人', icon: 'tenantCustomerLinkman-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantCustomer',
+    name: 'saas',
+    meta: {title: '用户信息', icon: 'tenantCustomer'},
+    children: [{
+      path: 'tenantCustomer',
+      name: 'tenantCustomer',
+      component: () => import('@/views/saas/tenantCustomer/index'),
+      meta: {title: '用户信息列表', icon: 'tenantCustomer-list'}
+    },
+      {
+        path: 'addTenantCustomer',
+        name: 'addTenantCustomer',
+        component: () => import('@/views/saas/tenantCustomer/add'),
+        meta: {title: '添加用户信息', icon: 'tenantCustomer-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantCustomer',
+        name: 'viewTenantCustomer',
+        component: () => import('@/views/saas/tenantCustomer/view'),
+        meta: {title: '查看用户信息', icon: 'tenantCustomer-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantCustomer',
+        name: 'updateTenantCustomer',
+        component: () => import('@/views/saas/tenantCustomer/update'),
+        meta: {title: '修改用户信息', icon: 'tenantCustomer-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantReceivable',
+    hidden: true,
+    name: 'saas',
+    meta: {title: '应收明细', icon: 'tenantReceivable'},
+    children: [{
+      path: 'tenantReceivable',
+      name: 'tenantReceivable',
+      component: () => import('@/views/saas/tenantReceivable/index'),
+      meta: {title: '应收明细列表', icon: 'tenantReceivable-list'}
+    },
+      {
+        path: 'addTenantReceivable',
+        name: 'addTenantReceivable',
+        component: () => import('@/views/saas/tenantReceivable/add'),
+        meta: {title: '添加应收明细', icon: 'tenantReceivable-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantReceivable',
+        name: 'viewTenantReceivable',
+        component: () => import('@/views/saas/tenantReceivable/view'),
+        meta: {title: '查看应收明细', icon: 'tenantReceivable-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantReceivable',
+        name: 'updateTenantReceivable',
+        component: () => import('@/views/saas/tenantReceivable/update'),
+        meta: {title: '修改应收明细', icon: 'tenantReceivable-add'},
+        hidden: true
+      }
+    ]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
