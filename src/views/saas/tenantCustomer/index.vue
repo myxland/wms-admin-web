@@ -126,6 +126,7 @@
         </el-form>
       </el-card>
       <el-tabs v-model="activeTab" type="card" >
+        <el-alert title="" type="info" show-icon="true" closable="false"></el-alert>
         <el-tab-pane label="欠费账单" name="arrears">
           <div class="table-container">
             <el-table ref="tenantReceivableTable"
@@ -730,6 +731,7 @@
         invoiceTypeOptions: Object.assign({},defaultInvoiceTypeOptions),
         list: null,
         tenantReceivableList:null,
+        tenantReceivableFooter:null,
         tenantPaymentList:null,
         tenantCustomerLinkmanList:null,
         tenantCustomerMeterChangeLogList:null,
@@ -803,6 +805,7 @@
         fetchTenantReceivableList(Object.assign(this.listTabQuery,{"customerId":id})).then(response => {
           this.tenantReceivableListLoading = false;
           this.tenantReceivableList = response.data.list;
+          this.tenantReceivableFooter = response.data.footer;
         });
 
         //加载缴费信息
