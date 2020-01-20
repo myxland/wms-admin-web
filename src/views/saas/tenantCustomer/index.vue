@@ -213,8 +213,69 @@
             </el-table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="已缴账单" name="paid">配置管理</el-tab-pane>
-        <el-tab-pane label="缴费历史" name="payment">缴费历史</el-tab-pane>
+        <el-tab-pane label="已缴账单" name="paid">已缴账单</el-tab-pane>
+        <el-tab-pane label="缴费历史" name="payment">
+          <div class="table-container">
+            <el-table ref="tenantPaymentTable"
+                      :data="tenantPaymentList"
+                      style="width: 100%"
+                      v-loading="tenantPaymentListLoading"
+                      border
+            >
+              <el-table-column label="实收账ID" width="180" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.id}}</template>
+              </el-table-column>
+              <el-table-column label="租户ID" width="280" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.tenantName}}</template>
+              </el-table-column>
+              <el-table-column label="内部生成的订单号" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.outTransno}}</template>
+              </el-table-column>
+              <el-table-column label="外部如微信支付宝传入的订单号" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.inTransno}}</template>
+              </el-table-column>
+              <el-table-column label="付款时间" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.payTime | formatTime}}</template>
+              </el-table-column>
+              <el-table-column label="实收账状态" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.paymentStatus | formatPaymentStatus}}</template>
+              </el-table-column>
+              <el-table-column label="用户ID" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerId}}</template>
+              </el-table-column>
+              <el-table-column label="收款部门ID" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.chargeDepartmentId}}</template>
+              </el-table-column>
+              <el-table-column label="收费员ID" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.chargeEmployeeId}}</template>
+              </el-table-column>
+              <el-table-column label="付款途径" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.payChannels | formatPayChannels}}</template>
+              </el-table-column>
+              <el-table-column label="付款方式" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.payMethod | formatPayMethod}}</template>
+              </el-table-column>
+              <el-table-column label="用户上期预存余额" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerBalanceMoneyBefore | formatMoney}}</template>
+              </el-table-column>
+              <el-table-column label="用户付款金额" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerPayMoney | formatMoney}}</template>
+              </el-table-column>
+              <el-table-column label="用户预存发生值" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerBalanceMoneyHappen | formatMoney}}</template>
+              </el-table-column>
+              <el-table-column label="所缴欠费金额" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.payTheArrearsMoney | formatMoney}}</template>
+              </el-table-column>
+              <el-table-column label="所缴违约金金额" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.payTheLateFeeMoney | formatMoney}}</template>
+              </el-table-column>
+              <el-table-column label="用户本期预存余额" width="100" align="right" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerBalanceMoneyAfter | formatMoney}}</template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-tab-pane>
         <el-tab-pane label="抄表计划" name="read">
           <div class="table-container">
             <el-table ref="tenantMeterReadLogCurrentTable"
@@ -231,6 +292,9 @@
               </el-table-column>
               <el-table-column label="结算月份" width="100" align="left" header-align="center">
                 <template slot-scope="scope">{{scope.row.readMonth | formatDate}}</template>
+              </el-table-column>
+              <el-table-column label="用户ID" width="100" align="left" header-align="center">
+                <template slot-scope="scope">{{scope.row.customerId}}</template>
               </el-table-column>
               <el-table-column label="水表ID" width="100" align="left" header-align="center">
                 <template slot-scope="scope">{{scope.row.meterId}}</template>
@@ -584,6 +648,7 @@
   import {fetchList, getTenantCustomer, deleteTenantCustomer} from '@/api/tenantCustomer'
   import {fetchList as fetchTenantInfoList} from '@/api/tenantInfo';
   import {fetchList as fetchTenantReceivableList} from '@/api/tenantReceivable';
+  import {fetchList as fetchTenantPaymentList} from '@/api/tenantPayment';
   import {fetchList as fetchTenantCustomerLinkmanList} from '@/api/tenantCustomerLinkman';
   import {fetchList as fetchTenantMeterList} from '@/api/tenantMeter';
   import {fetchList as fetchTenantCustomerMeterChangeLogList} from '@/api/tenantCustomerMeterChangeLog';
@@ -665,6 +730,7 @@
         invoiceTypeOptions: Object.assign({},defaultInvoiceTypeOptions),
         list: null,
         tenantReceivableList:null,
+        tenantPaymentList:null,
         tenantCustomerLinkmanList:null,
         tenantCustomerMeterChangeLogList:null,
         tenantMeterReadLogCurrentList:null,
@@ -672,6 +738,7 @@
         total: null,
         listLoading: true, 
         tenantReceivableListLoading:true,
+        tenantPaymentListLoading:true,
         tenantCustomerLinkmanListLoading:true,
         tenantMeterListLoading:true, 
         tenantCustomerMeterChangeLogListLoading:true,
@@ -684,6 +751,7 @@
       //this.getList();
       this.listLoading = false;
       this.tenantReceivableListLoading = false;
+      this.tenantPaymentListLoading = false;
       this.tenantCustomerLinkmanListLoading = false;
       this.tenantMeterListLoading = false;
       this.tenantCustomerMeterChangeLogListLoading = false;
@@ -735,6 +803,13 @@
         fetchTenantReceivableList(Object.assign(this.listTabQuery,{"customerId":id})).then(response => {
           this.tenantReceivableListLoading = false;
           this.tenantReceivableList = response.data.list;
+        });
+
+        //加载缴费信息
+        this.tenantPaymentListLoading = true;
+        fetchTenantPaymentList(Object.assign(this.listTabQuery,{"customerId":id})).then(response => {
+          this.tenantPaymentListLoading = false;
+          this.tenantPaymentList = response.data.list;
         });
 
         //加载抄表计划信息

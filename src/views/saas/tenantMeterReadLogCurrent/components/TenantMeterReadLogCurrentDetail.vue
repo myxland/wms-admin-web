@@ -23,6 +23,9 @@
                 placeholder="请选择结算月份">
         </el-date-picker>
       </el-form-item>
+      <el-form-item label="用户ID：" prop="customerId">
+        <el-input v-model="tenantMeterReadLogCurrent.customerId"></el-input>
+      </el-form-item>
       <el-form-item label="水表ID：" prop="meterId">
         <el-input v-model="tenantMeterReadLogCurrent.meterId"></el-input>
       </el-form-item>
@@ -157,6 +160,7 @@
   const defaultTenantMeterReadLogCurrent={
     tenantId: '',
     readMonth: '',
+    customerId: '',
     meterId: '',
     meterYearTotalWatersBefore: null,
     settleStartTime: '',

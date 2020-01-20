@@ -295,6 +295,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantWaterArea',
+    hidden: true,
     name: 'saas',
     meta: {title: '供水区域', icon: 'tenantWaterArea'},
     children: [{
@@ -330,6 +331,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantPriceItem',
+    hidden: true,
     name: 'saas',
     meta: {title: '费用项目', icon: 'tenantPriceItem'},
     children: [{
@@ -365,6 +367,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantPriceType',
+    hidden: true,
     name: 'saas',
     meta: {title: '水价分类', icon: 'tenantPriceType'},
     children: [{
@@ -400,6 +403,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantWaterType',
+    hidden: true,
     name: 'saas',
     meta: {title: '用水分类', icon: 'tenantWaterType'},
     children: [{
@@ -435,6 +439,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantManufactor',
+    hidden: true,
     name: 'saas',
     meta: {title: '水表厂商', icon: 'tenantManufactor'},
     children: [{
@@ -470,6 +475,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantCaliber',
+    hidden: true,
     name: 'saas',
     meta: {title: '水表口径', icon: 'tenantCaliber'},
     children: [{
@@ -505,6 +511,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantMeterStatus',
+    hidden: true,
     name: 'saas',
     meta: {title: '水表状况', icon: 'tenantMeterStatus'},
     children: [{
@@ -540,6 +547,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantCustomerType',
+    hidden: true,
     name: 'saas',
     meta: {title: '用户分类', icon: 'tenantCustomerType'},
     children: [{
@@ -680,6 +688,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantCustomerMeterChangeLog',
+    hidden: true,
     name: 'saas',
     meta: {title: '信息变更', icon: 'tenantCustomerMeterChangeLog'},
     children: [{
@@ -715,6 +724,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantConfigSms',
+    hidden: true,
     name: 'saas',
     meta: {title: '短信参数设置', icon: 'tenantConfigSms'},
     children: [{
@@ -750,6 +760,7 @@ export const constantRouterMap = [
     path: '/saas',
     component: Layout,
     redirect: '/saas/tenantCustomerLinkman',
+    hidden: true,
     name: 'saas',
     meta: {title: '用户联系人', icon: 'tenantCustomerLinkman'},
     children: [{
@@ -920,6 +931,42 @@ export const constantRouterMap = [
         name: 'updateTenantCustomerMeterChangeLog',
         component: () => import('@/views/saas/tenantCustomerMeterChangeLog/update'),
         meta: {title: '修改信息变更', icon: 'tenantCustomerMeterChangeLog-add'},
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/saas',
+    component: Layout,
+    redirect: '/saas/tenantPayment',
+    hidden: true,
+    name: 'saas',
+    meta: {title: '实收总账，记录每次缴费的总信息', icon: 'tenantPayment'},
+    children: [{
+      path: 'tenantPayment',
+      name: 'tenantPayment',
+      component: () => import('@/views/saas/tenantPayment/index'),
+      meta: {title: '实收总账，记录每次缴费的总信息列表', icon: 'tenantPayment-list'}
+    },
+      {
+        path: 'addTenantPayment',
+        name: 'addTenantPayment',
+        component: () => import('@/views/saas/tenantPayment/add'),
+        meta: {title: '添加实收总账，记录每次缴费的总信息', icon: 'tenantPayment-add'},
+        hidden: true
+      },
+      {
+        path: 'viewTenantPayment',
+        name: 'viewTenantPayment',
+        component: () => import('@/views/saas/tenantPayment/view'),
+        meta: {title: '查看实收总账，记录每次缴费的总信息', icon: 'tenantPayment-view'},
+        hidden: true
+      },
+      {
+        path: 'updateTenantPayment',
+        name: 'updateTenantPayment',
+        component: () => import('@/views/saas/tenantPayment/update'),
+        meta: {title: '修改实收总账，记录每次缴费的总信息', icon: 'tenantPayment-add'},
         hidden: true
       }
     ]

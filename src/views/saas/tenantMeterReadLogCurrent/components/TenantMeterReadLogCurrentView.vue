@@ -10,6 +10,9 @@
       <el-form-item label="结算月份：" prop="readMonth">
         {{tenantMeterReadLogCurrent.readMonth}}
       </el-form-item>
+      <el-form-item label="用户ID：" prop="customerId">
+      	{{tenantMeterReadLogCurrent.customerId}}
+      </el-form-item>
       <el-form-item label="水表ID：" prop="meterId">
       	{{tenantMeterReadLogCurrent.meterId}}
       </el-form-item>
@@ -72,6 +75,7 @@
   const defaultTenantMeterReadLogCurrent={
     tenantId: '',
     readMonth: '',
+    customerId: '',
     meterId: '',
     meterYearTotalWatersBefore: null,
     settleStartTime: '',

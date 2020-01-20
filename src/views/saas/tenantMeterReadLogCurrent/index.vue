@@ -49,6 +49,9 @@
                 placeholder="请选择时间">
               </el-date-picker>
             </el-form-item>
+            <el-form-item label="用户ID：">
+              <el-input style="width: 203px" v-model="listQuery.customerId" placeholder="用户ID"></el-input>
+            </el-form-item>
             <el-form-item label="水表ID：">
               <el-input style="width: 203px" v-model="listQuery.meterId" placeholder="水表ID"></el-input>
             </el-form-item>
@@ -204,6 +207,9 @@
         <el-table-column label="结算月份" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.readMonth | formatDate}}</template>
         </el-table-column>
+        <el-table-column label="用户ID" width="100" align="left" header-align="center">
+          <template slot-scope="scope">{{scope.row.customerId}}</template>
+        </el-table-column>
         <el-table-column label="水表ID" width="100" align="left" header-align="center">
           <template slot-scope="scope">{{scope.row.meterId}}</template>
         </el-table-column>
@@ -301,6 +307,7 @@
     readMonth: null,
     readMonthStart: null,
     readMonthEnd: null,
+    customerId: null,
     meterId: null,
     meterYearTotalWatersBefore: null,
     settleStartTime: null,
