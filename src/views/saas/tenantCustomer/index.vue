@@ -37,7 +37,34 @@
           </div>
     </el-aside>
     <el-main>
+      <el-card shadow="never">
+        <el-button
+                  @click="tenantCustomerInfoChangeClick()"
+                  type="primary"
+                  size="small">
+                  用户变更
+        </el-button>
+        <el-button
+                  @click="tenantCustomerInvoiceChangeClick()"
+                  type="primary"
+                  size="small">
+                  开票信息变更
+        </el-button>
+        <el-button
+                  @click="tenantCustomerCloseClick()"
+                  type="primary"
+                  size="small">
+                  用户销户
+        </el-button>
+        <el-button
+                  @click="tenantCustomerBalanceRefundClick()"
+                  type="primary"
+                  size="small">
+                  预存退款
+        </el-button>
+      </el-card>
        <el-card shadow="never">
+         
         <el-form :model="tenantCustomer" :inline="true" ref="tenantCustomerFrom" label-width="150px">          
           <el-form-item label="用户代码：" prop="customerCode">
             <el-input v-model="tenantCustomer.customerCode"></el-input>
